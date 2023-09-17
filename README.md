@@ -1,1 +1,1 @@
-# TrentClassFind
+Trent University Class Find

@@ -1,0 +1,147 @@
+{
+  "folders": [
+    {
+      "name": "All Files",
+      "path": ".."
+    },
+    {
+      "name": "App Code",
+      "path": "../lib"
+    }
+  ],
+  "settings": {
+    "[dart]": {
+      "editor.tabSize": 2,
+      "editor.insertSpaces": true,
+      "editor.detectIndentation": false,
+      "editor.suggest.insertMode": "replace",
+      "editor.defaultFormatter": "Dart-Code.dart-code",
+      "editor.inlayHints.enabled": "offUnlessPressed"
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true
+    },
+
+    "powershell.cwd": "c:\\files and stuff\\code tings\\TrentClassFind",
+
+    "dart.openDevTools": "never",
+    "dart.shareDevToolsWithFlutter": true,
+    "dart.flutterSdkPath": "C:\\files and stuff\\pathItems\\flutter\\bin",
+    "dart.flutterRunLogFile": "C:\\files and stuff\\code tings\\TrentClassFind\\flutter.log",
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "debug",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": ["--verbose"],
+        "cwd": "${workspaceFolder:All Files}",
+        "preLaunchTask": "Flutter: Pre Launch Tasks"
+      },
+      {
+        "name": "debug (web)",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": ["--verbose", "--web-hostname=localhost", "--web-port=5000"],
+        "cwd": "${workspaceFolder:All Files}",
+        "preLaunchTask": "Flutter: Pre Launch Tasks"
+      },
+      {
+        "name": "profile",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "args": ["--verbose"],
+        "cwd": "${workspaceFolder:All Files}",
+        "preLaunchTask": "Flutter: Pre Launch Tasks"
+      },
+      {
+        "name": "profile (web)",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "args": ["--verbose", "--web-hostname=localhost", "--web-port=5000"],
+        "cwd": "${workspaceFolder:All Files}",
+        "preLaunchTask": "Flutter: Pre Launch Tasks"
+      },
+      {
+        "name": "release",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "args": ["--verbose"],
+        "cwd": "${workspaceFolder:All Files}",
+        "preLaunchTask": "Flutter: Pre Launch Tasks"
+      },
+      {
+        "name": "release (web)",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "args": ["--verbose", "--web-hostname=localhost", "--web-port=5000"],
+        "cwd": "${workspaceFolder:All Files}",
+        "preLaunchTask": "Flutter: Pre Launch Tasks"
+      },
+      {
+        "name": "runner.ps1",
+        "type": "PowerShell",
+        "request": "launch",
+        "script": "${workspaceFolder:All Files}/runner.ps1",
+        "cwd": "${workspaceFolder:All Files}"
+      }
+    ],
+    "compounds": []
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "type": "shell",
+        "command": "flutter",
+        "args": ["upgrade", "--verbose", "--force"],
+        "problemMatcher": [],
+        "label": "Flutter: Upgrade SDK",
+        "detail": ""
+      },
+      {
+        "type": "shell",
+        "command": "flutter",
+        "args": ["pub", "get", "--verbose"],
+        "problemMatcher": [],
+        "label": "Flutter: Update Dependencies",
+        "detail": ""
+      },
+      {
+        "type": "shell",
+        "command": "flutter",
+        "args": ["clean", "--verbose"],
+        "problemMatcher": [],
+        "label": "Flutter: Clean",
+        "detail": ""
+      },
+      {
+        "type": "shell",
+        "label": "Flutter: Pre Launch Tasks",
+        "dependsOrder": "sequence",
+        "dependsOn": [
+          "Flutter: Upgrade SDK",
+          "Flutter: Clean",
+          "Flutter: Update Dependencies"
+        ],
+        "command": "echo",
+        "args": ["Pre Launch Tasks Complete"],
+        "problemMatcher": [],
+        "detail": ""
+      }
+    ]
+  }
+}
