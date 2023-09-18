@@ -130,12 +130,21 @@
       },
       {
         "type": "shell",
+        "command": "dart",
+        "args": ["run", "flutter_native_splash:create"],
+        "problemMatcher": [],
+        "label": "Flutter: Create Splash Screen",
+        "detail": ""
+      },
+      {
+        "type": "shell",
         "label": "Flutter: Pre Launch Tasks",
         "dependsOrder": "sequence",
         "dependsOn": [
           "Flutter: Upgrade SDK",
           "Flutter: Clean",
-          "Flutter: Update Dependencies"
+          "Flutter: Update Dependencies",
+          "Flutter: Create Splash Screen"
         ],
         "command": "echo",
         "args": ["Pre Launch Tasks Complete"],

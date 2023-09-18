@@ -13,6 +13,9 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  flutter_native_splash: ^2.3.2
+  shared_preferences: ^2.2.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
@@ -20,5 +23,51 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
+flutter_native_splash:
+  android: true
+
+  android_gravity: center
+
+  android_screen_orientation: portrait
+
+  color: "#ffffff"
+  color_dark: "#000000"
+
+  fullscreen: true
+
+  icon_background_color: "#ffffff"
+  icon_background_color_dark: "#000000"
+
+  image: assets/icons/splash_icon.png
+  image_dark: assets/icons/splash_icon.png
+
+  ios: false
+
+  ios_content_mode: center
+
+  web: false
+
+  web_image_mode: center
+
+  android_12:
+    android_gravity: center
+
+    color: "#ffffff"
+    color_dark: "#000000"
+
+    icon_background_color: "#ffffff"
+    icon_background_color_dark: "#000000"
+
+    image: assets/icons/splash_icon.png
+    image_dark: assets/icons/splash_icon.png
+
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
+  
+  fonts:
+    - family: ZarBrush
+      fonts:
+        - asset: assets/fonts/ZarBrush.ttf
