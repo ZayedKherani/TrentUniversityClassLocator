@@ -16,12 +16,19 @@ dependencies:
   flutter_native_splash: ^2.3.2
   shared_preferences: ^2.2.1
   provider: ^6.0.5
+  url_launcher: ^6.1.14
+  mockito: ^5.4.2
+  page_transition: ^2.1.0
+  permission_handler: ^11.0.0
+  gallery_saver: ^2.3.2
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  glob: ^2.1.2
 
 flutter_native_splash:
   android: true
@@ -45,7 +52,7 @@ flutter_native_splash:
 
   ios_content_mode: center
 
-  web: false
+  web: true
 
   web_image_mode: center
 
@@ -65,7 +72,14 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/icons/
+    - assets/images/
+    - assets/images/720/
+    - assets/images/1080/
+    - assets/images/review/
+
+    - assets/sample.txt
   
   fonts:
     - family: ZarBrush

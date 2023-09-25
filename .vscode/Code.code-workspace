@@ -33,6 +33,10 @@
     "dart.shareDevToolsWithFlutter": true,
     "dart.flutterSdkPath": "C:\\files and stuff\\pathItems\\flutter\\bin",
     "dart.flutterRunLogFile": "C:\\files and stuff\\code tings\\TrentClassFind\\flutter.log",
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none",
   },
   "launch": {
     "version": "0.2.0",
@@ -96,6 +100,13 @@
         "type": "PowerShell",
         "request": "launch",
         "script": "${workspaceFolder:All Files}/runner.ps1",
+        "cwd": "${workspaceFolder:All Files}"
+      },
+      {
+        "name": "imageDownloader.py",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder:All Files}/imageDownloader.py",
         "cwd": "${workspaceFolder:All Files}"
       }
     ],

@@ -14,12 +14,11 @@ class ThemeModeNotifierService with ChangeNotifier {
   ) {
     appThemeMode = themeMode!;
 
-    // SETTINGS APP RADIO CONTROL
-    // appThemeSettingsInt = themeMode == ThemeMode.light
-    //     ? 0
-    //     : themeMode == ThemeMode.dark
-    //         ? 1
-    //         : 2;
+    appThemeSettingsInt = themeMode == ThemeMode.light
+        ? 0
+        : themeMode == ThemeMode.dark
+            ? 1
+            : 2;
 
     notifyListeners();
 
