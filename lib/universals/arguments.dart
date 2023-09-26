@@ -54,3 +54,11 @@ class TrentAppSettingsLicensePackagePageArguments {
     required this.paragraphs,
   });
 }
+
+class TrentFindArguments extends TrentRoomArguments {
+  TrentFindArguments({
+    required super.centerIndex,
+    required super.floorIndex,
+    required super.roomIndex,
+  });
+}

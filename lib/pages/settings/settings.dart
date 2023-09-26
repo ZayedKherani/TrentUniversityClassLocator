@@ -29,13 +29,15 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext? context,
+  ) {
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Scrollbar(
-              controller: settingsPageScrollController!,
+              // controller: settingsPageScrollController!,
               interactive: true,
               trackVisibility: true,
               child: SingleChildScrollView(
@@ -246,7 +248,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                             leading: Icon(
                               Icons.info_outline,
                               color: Theme.of(
-                                context,
+                                context!,
                               ).colorScheme.primary,
                             ),
                             title: Text(
@@ -273,7 +275,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     context!,
                                   ).colorScheme.surface,
                                   content: const Text(
-                                    "Version 0.4.6-alpha2",
+                                    "Version 1.0.9-beta-rc2",
                                   ),
                                   actions: [
                                     TextButton(
@@ -283,7 +285,8 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                           '/settings/licenses',
                                           arguments:
                                               const TrentAppSettingsLicensePageArguments(
-                                            applicationVersion: '0.4.6-alpha2',
+                                            applicationVersion:
+                                                '1.0.9-beta-rc2',
                                             applicationLegalese:
                                                 '© 2023 Zayed Kherani',
                                             applicationName:

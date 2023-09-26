@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:trent_u_class_find/pages/settings/package_page.dart';
+import 'package:trent_u_class_find/pages/buildings/find.dart';
 
 import 'package:trent_u_class_find/universals/arguments.dart';
 import 'package:trent_u_class_find/pages/buildings/center.dart';
@@ -16,6 +16,7 @@ import 'package:trent_u_class_find/pages/settings/license_page.dart';
 import 'package:trent_u_class_find/pages/settings/settings.dart';
 import 'package:trent_u_class_find/services/theme_mode_notifier_service/theme_mode_notifier_service.dart';
 import 'package:trent_u_class_find/universals/theme.dart';
+import 'package:trent_u_class_find/pages/settings/package_page.dart';
 import 'package:trent_u_class_find/universals/variables.dart';
 
 void main() {
@@ -226,6 +227,34 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                         packageName: args.packageName,
                         packageOccorrences: args.packageOccorrences,
                         paragraphs: args.paragraphs,
+                      ),
+                type: PageTransitionType.rightToLeft,
+              );
+            }
+
+            if (settings.name == '/room/find') {
+              final TrentFindArguments args =
+                  settings.arguments as TrentFindArguments;
+
+              return PageTransition(
+                child: MediaQuery.of(
+                          context!,
+                        ).size.width >
+                        600
+                    ? Center(
+                        child: SizedBox(
+                          width: 550.0,
+                          child: TrentFind(
+                            centerIndex: args.centerIndex,
+                            floorIndex: args.floorIndex,
+                            roomIndex: args.roomIndex,
+                          ),
+                        ),
+                      )
+                    : TrentFind(
+                        centerIndex: args.centerIndex,
+                        floorIndex: args.floorIndex,
+                        roomIndex: args.roomIndex,
                       ),
                 type: PageTransitionType.rightToLeft,
               );

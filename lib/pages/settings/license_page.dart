@@ -43,13 +43,15 @@ class _TrentAppSettingsLicensePageState
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext? context,
+  ) {
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Scrollbar(
-              controller: licensesPageScrollController!,
+              // controller: licensesPageScrollController!,
               interactive: true,
               trackVisibility: true,
               child: SingleChildScrollView(
@@ -239,7 +241,7 @@ class _TrentAppSettingsLicensePageState
                         ),
                         SizedBox(
                           height: MediaQuery.of(
-                                context,
+                                context!,
                               ).size.height /
                               10,
                         ),

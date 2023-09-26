@@ -35,13 +35,15 @@ class _PackagePageState extends State<PackagePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext? context,
+  ) {
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Scrollbar(
-              controller: packagePageScrollController!,
+              // controller: packagePageScrollController!,
               interactive: true,
               trackVisibility: true,
               child: SingleChildScrollView(
@@ -99,7 +101,7 @@ class _PackagePageState extends State<PackagePage> {
                         ),
                         SizedBox(
                           height: MediaQuery.of(
-                                context,
+                                context!,
                               ).size.height /
                               10,
                         ),

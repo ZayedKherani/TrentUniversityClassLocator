@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:trent_u_class_find/models/enums/enums.dart';
 import 'package:trent_u_class_find/models/room/room.dart';
+import 'package:trent_u_class_find/models/step/step.dart';
+import 'package:trent_u_class_find/models/steps/steps.dart';
 
 String? generateRandomString() {
   const String charset =
@@ -62,6 +64,17 @@ void main() {
             reviewImageAssetPath: reviewImageAssetPath,
             hDImageAssetPath: hDImageAssetPath,
             fHDImageAssetPath: fHDImageAssetPath,
+            findRoomSteps: const TrentRoomFindSteps(
+              steps: <TrentRoomFindStep?>[
+                TrentRoomFindStep(
+                  stepNumber: "NO DATA",
+                  stepDescription: "NO DATA",
+                  stepSmallImageAssetPath: "NO DATA",
+                  stepHDImageAssetPath: "NO DATA",
+                  stepFHDImageAssetPath: "NO DATA",
+                ),
+              ],
+            ),
           );
         },
       );

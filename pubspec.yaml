@@ -42,8 +42,8 @@ flutter_native_splash:
 
   fullscreen: true
 
-  icon_background_color: "#ffffff"
-  icon_background_color_dark: "#000000"
+  # icon_background_color: "#ffffff"
+  # icon_background_color_dark: "#000000"
 
   image: assets/icons/splash_icon.png
   image_dark: assets/icons/splash_icon.png
@@ -62,8 +62,8 @@ flutter_native_splash:
     color: "#ffffff"
     color_dark: "#000000"
 
-    icon_background_color: "#ffffff"
-    icon_background_color_dark: "#000000"
+    # icon_background_color: "#ffffff"
+    # icon_background_color_dark: "#000000"
 
     image: assets/icons/splash_icon.png
     image_dark: assets/icons/splash_icon.png
@@ -78,6 +78,10 @@ flutter:
     - assets/images/720/
     - assets/images/1080/
     - assets/images/review/
+    - assets/images/find/
+    - assets/images/find/720/
+    - assets/images/find/1080/
+    - assets/images/find/small/
 
     - assets/sample.txt
   

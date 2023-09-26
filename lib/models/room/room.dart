@@ -1,4 +1,5 @@
 import 'package:trent_u_class_find/models/enums/enums.dart';
+import 'package:trent_u_class_find/models/steps/steps.dart';
 
 class TrentRoomModel {
   final String? roomNumber;
@@ -14,7 +15,7 @@ class TrentRoomModel {
   final String? hDImageAssetPath;
   final String? fHDImageAssetPath;
 
-  final String? findRoomData;
+  final TrentRoomFindSteps? findRoomSteps;
 
   const TrentRoomModel({
     required this.roomNumber,
@@ -26,6 +27,6 @@ class TrentRoomModel {
     required this.reviewImageAssetPath,
     required this.hDImageAssetPath,
     required this.fHDImageAssetPath,
-    this.findRoomData,
+    required this.findRoomSteps,
   });
 }

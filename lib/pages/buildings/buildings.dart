@@ -27,7 +27,7 @@ class _BuildingsPageState extends State<BuildingsPage>
     BuildContext? context,
   ) {
     return Scrollbar(
-      controller: buildingsPageScrollController!,
+      // controller: buildingsPageScrollController!,
       interactive: true,
       trackVisibility: true,
       child: SingleChildScrollView(

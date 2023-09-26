@@ -44,7 +44,7 @@ class _TrentCenterState extends State<TrentCenter> {
         body: Stack(
           children: [
             Scrollbar(
-              controller: centerPageScrollController!,
+              // controller: centerPageScrollController!,
               interactive: true,
               trackVisibility: true,
               child: SingleChildScrollView(
@@ -157,7 +157,7 @@ class _TrentCenterState extends State<TrentCenter> {
                                             }
                                           },
                                           child: const Text(
-                                            "Download",
+                                            "Save Image",
                                           ),
                                         ),
                                       ],

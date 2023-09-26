@@ -190,7 +190,7 @@ def download_image(url, save_path):
         # save the image by writing the response content to the file
         with open(save_path, 'wb') as file:
             file.write(response.content)
-            
+
     # if the image wasn't downloaded
     else:
         # don't save the image
@@ -496,21 +496,104 @@ photosToDownload = list(set(photosToDownload))
 #         save_path = f"./assets/images/find/{url.split('/')[-2]}/{url.split('/')[-1]}"
 #         assetInfoUrlsFile.write(f"{save_path}{escapeCharacter}")
 #         # print the number of photos to download and the number of photos downloaded
-#         print(f'{round((len(completedPhotos)/len(photosToDownload)), 4) * 100}% completed, {len(completedPhotos)} downloaded, downloading {save_path}                                                                            ', end='\r', flush=True)
+# print(f'{round((len(completedPhotos)/len(photosToDownload)), 4) * 100}% completed, {len(completedPhotos)} downloaded, downloading {save_path}                                                                            ', end='\r', flush=True)
 #         # download the photo if it doesn't exist
 #         if not exists(save_path):
 #             # download the photo
 #             download_image(url, save_path)
 
-assetInfoFileLines: str = ""
+
+def returnNextBraceIndex(varFileLinesIndex: int):
+    while variablesFileLines[varFileLinesIndex].strip() != "),":
+        varFileLinesIndex += 1
+
+    return varFileLinesIndex
+
+
+variablesFileLines = []
+variablesFileLinesToWrite = []
+
+with open('./lib/universals/variables.dart', 'r') as variablesFile:
+    variablesFileLines = variablesFile.readlines()
 
 with open('assetInfo.txt', 'r') as assetInfoFile:
-    assetInfoFileLines = assetInfoFile.readlines()
+    linesToSkip = []
 
-with open('assetInfo.txt', 'w') as assetInfoFile:
-    for line in assetInfoFileLines:
-        if "            - https://" in line:
-            assetInfoFile.write(line)
-            assetInfoFile.write(f"            - ./assets/images/find/{line.strip()[2:].split('/')[-2]}/{line.strip()[2:].split('/')[-1]}\n")
-        else:
-            assetInfoFile.write(line)
+    lines = assetInfoFile.readlines()
+    
+    fin = False
+
+    for varFileLine in variablesFileLines:
+        if fin:
+            variablesFileLinesToWrite.append("),\n")
+            variablesFileLinesToWrite.append("],\n")
+            variablesFileLinesToWrite.append("),\n")
+            variablesFileLinesToWrite.append("\n\n")
+            fin = False
+
+        variablesFileLinesToWrite.append(varFileLine)
+
+        if "roomNumber:" in varFileLine:
+            for line in lines:
+                if len(line.strip()) == len(line):
+                    continue
+                if line in linesToSkip:
+                    linesToSkip.remove(line)
+                    continue
+
+                if line[4] == "-" and varFileLine.strip().replace("roomNumber: ", "").replace(",", "").replace("'", "").strip() == line[6:].split(' ')[1].strip():
+                    for deepLine in lines[lines.index(line) + 1:]:
+                        if deepLine[4] == "-":
+                            break
+
+                        linesToSkip.append(deepLine)
+
+                        # if deepLine[7] == "-":
+                        #     if lines.index(deepLine) > 3:
+                        #         variablesFileLinesToWrite.append("),\n")
+                        #         variablesFileLinesToWrite.append("],\n")
+                        #         variablesFileLinesToWrite.append("),\n")
+                        #         variablesFileLinesToWrite.append("\n\n")
+
+                        if deepLine[9] == "-":
+                            if lines.index(deepLine) > 3:
+                                if deepLine[-3:].strip() != "1":
+                                    variablesFileLinesToWrite.append(
+                                        "),\n")
+                                if deepLine[-3:].strip() == "1":
+                                    variablesFileLinesToWrite.append(
+                                        "findRoomSteps: TrentRoomFindSteps(\n")
+                                    variablesFileLinesToWrite.append(
+                                        "steps: <TrentRoomFindStep?>[\n")
+                            variablesFileLinesToWrite.append(
+                                "TrentRoomFindStep(\n")
+                            variablesFileLinesToWrite.append(
+                                f"stepNumber: '{deepLine[-3:].strip()}',\n")
+
+                        deepLine = deepLine.replace("\n", "")
+
+                        if len(deepLine) >= 20 and deepLine[12] == "-" and deepLine[14:46] != "https://www.classfind.com/trent/" and deepLine[14:35] != "./assets/images/find/":
+                            fin = True
+                            variablesFileLinesToWrite.append(
+                                f"stepDescription: '{deepLine[14:]}',\n")
+
+                        if len(deepLine) >= 20 and deepLine[12] == "-" and deepLine[14:46] == "https://www.classfind.com/trent/" and deepLine[14:35] != "./assets/images/find/":
+                            continue
+
+                        if len(deepLine) >= 20 and deepLine[12] == "-" and deepLine[14:46] != "https://www.classfind.com/trent/" and deepLine[14:41] == "./assets/images/find/small/":
+                            variablesFileLinesToWrite.append(
+                                f"stepSmallImageAssetPath: '{deepLine[16:]}',\n")
+
+                        if len(deepLine) >= 20 and deepLine[12] == "-" and deepLine[14:46] != "https://www.classfind.com/trent/" and deepLine[14:39] == "./assets/images/find/720/":
+                            variablesFileLinesToWrite.append(
+                                f"stepHDImageAssetPath: '{deepLine[16:]}',\n")
+
+                        if len(deepLine) >= 20 and deepLine[12] == "-" and deepLine[14:46] != "https://www.classfind.com/trent/" and deepLine[14:40] == "./assets/images/find/1080/":
+                            variablesFileLinesToWrite.append(
+                                f"stepFHDImageAssetPath: '{deepLine[16:]}',\n")
+
+                    break
+
+with open('./lib/universals/variable.dart', 'w') as variableFile:
+    for deepLine in variablesFileLinesToWrite:
+        variableFile.write(deepLine)

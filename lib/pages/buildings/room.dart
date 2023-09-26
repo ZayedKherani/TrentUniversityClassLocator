@@ -3,6 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
 import 'package:trent_u_class_find/services/image_file_service/image_file_service.dart';
+import 'package:trent_u_class_find/universals/arguments.dart';
 import 'package:trent_u_class_find/universals/variables.dart';
 
 class TrentRoom extends StatefulWidget {
@@ -47,7 +48,7 @@ class _TrentRoomState extends State<TrentRoom> {
         body: Stack(
           children: [
             Scrollbar(
-              controller: centerPageScrollController!,
+              // controller: centerPageScrollController!,
               interactive: true,
               trackVisibility: true,
               child: SingleChildScrollView(
@@ -187,7 +188,7 @@ class _TrentRoomState extends State<TrentRoom> {
                                             }
                                           },
                                           child: const Text(
-                                            "Download",
+                                            "Save Image",
                                           ),
                                         ),
                                       ],
@@ -330,6 +331,38 @@ class _TrentRoomState extends State<TrentRoom> {
                               ),
                             ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Card(
+                          child: ListTile(
+                            leading: const Icon(
+                              Icons.location_on_rounded,
+                            ),
+                            title: const Text(
+                              "Find",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'ZarBrush',
+                                fontSize: 22,
+                              ),
+                            ),
+                            trailing: const Icon(
+                              Icons.chevron_right_rounded,
+                            ),
+                            onTap: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                '/room/find',
+                                arguments: TrentFindArguments(
+                                  centerIndex: widget.centerIndex,
+                                  floorIndex: widget.floorIndex,
+                                  roomIndex: widget.roomIndex,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         SizedBox(
                           height: MediaQuery.of(
