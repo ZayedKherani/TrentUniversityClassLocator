@@ -1,1 +1,0 @@
-Trent University Class Locator
