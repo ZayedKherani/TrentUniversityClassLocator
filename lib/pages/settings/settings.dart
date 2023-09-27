@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trent_u_class_locator/universals/arguments.dart';
 
@@ -299,7 +300,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     context!,
                                   ).colorScheme.surface,
                                   content: const Text(
-                                    "Version 1.0.9-beta-rc2",
+                                    "Version 1.0.0-beta-rc2",
                                   ),
                                   actions: [
                                     TextButton(
@@ -310,7 +311,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                           arguments:
                                               const TrentAppSettingsLicensePageArguments(
                                             applicationVersion:
-                                                '1.0.9-beta-rc2',
+                                                '1.0.0-beta-rc2',
                                             applicationLegalese:
                                                 '© 2023 Zayed Kherani',
                                             applicationName:
@@ -462,6 +463,28 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     ),
                                   ],
                                 ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Card(
+                          child: ListTile(
+                            leading: const FaIcon(
+                              FontAwesomeIcons.file,
+                            ),
+                            title: const Text(
+                              "Terms and Conditions",
+                            ),
+                            trailing: const Icon(
+                              Icons.chevron_right_rounded,
+                            ),
+                            onTap: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                '/terms',
                               );
                             },
                           ),

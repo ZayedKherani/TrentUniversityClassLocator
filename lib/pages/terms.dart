@@ -110,15 +110,30 @@ The owner of The Trent University Class Find App, represented by the entity that
                               color: Theme.of(
                                 context,
                               ).colorScheme.surface,
-                              child: const Center(
-                                child: Text(
-                                  "Terms of Use",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'ZarBrush',
-                                    fontSize: 28,
+                              child: Stack(
+                                children: [
+                                  const Center(
+                                    child: Text(
+                                      'Terms and Conditions',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'ZarBrush',
+                                        fontSize: 28,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: IconButton(
+                                      icon: const Icon(
+                                        Icons.arrow_back_rounded,
+                                      ),
+                                      onPressed: () => Navigator.pop(
+                                        context,
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),

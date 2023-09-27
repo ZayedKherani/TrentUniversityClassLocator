@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:trent_u_class_locator/pages/not_found.dart';
 import 'package:trent_u_class_locator/pages/buildings/find.dart';
 import 'package:trent_u_class_locator/pages/terms.dart';
 
@@ -354,6 +355,35 @@ class _TrentUniversityClassLocatorAppState
 
             return null;
           },
+          onUnknownRoute: (
+            RouteSettings? settings,
+          ) =>
+              PageTransition(
+            child: Container(
+              color: globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                  ? Colors.black
+                  : globalTrentAppNotifier!.getThemeMode() == ThemeMode.light
+                      ? Colors.white
+                      : MediaQuery.of(
+                                context!,
+                              ).platformBrightness ==
+                              Brightness.dark
+                          ? Colors.black
+                          : Colors.white,
+              child: MediaQuery.of(
+                        context!,
+                      ).size.width >
+                      600
+                  ? const Center(
+                      child: SizedBox(
+                        width: 550.0,
+                        child: UnknownPage(),
+                      ),
+                    )
+                  : const UnknownPage(),
+            ),
+            type: PageTransitionType.rightToLeft,
+          ),
         );
       },
     );
