@@ -1,3 +1,5 @@
+import 'package:universal_html/html.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -163,7 +165,8 @@ class _TrentFindState extends State<TrentFind> {
                                                   ),
                                                 ),
                                                 child: Image.asset(
-                                                  globalTrentAppNotifier!.getImageViewQuality() ==
+                                                  globalTrentAppNotifier!
+                                                              .getImageViewQuality() ==
                                                           1
                                                       ? trentCentersDB[widget
                                                               .centerIndex!]!
@@ -186,8 +189,13 @@ class _TrentFindState extends State<TrentFind> {
                                                               findIndex]!
                                                           .stepHDImageAssetPath!,
                                                   width: MediaQuery.of(
-                                                    context,
-                                                  ).size.width,
+                                                            context,
+                                                          ).size.width >
+                                                          550.0
+                                                      ? 550.0
+                                                      : MediaQuery.of(
+                                                          context,
+                                                        ).size.width,
                                                 ),
                                               ),
                                               const SizedBox(
@@ -195,43 +203,133 @@ class _TrentFindState extends State<TrentFind> {
                                               ),
                                               ElevatedButton(
                                                 onPressed: () async {
-                                                  if (await Permission.photos
-                                                      .request()
-                                                      .isGranted) {
-                                                    await GallerySaver
-                                                        .saveImage(
-                                                      (await getFilePathFromAssets(
-                                                        file:
-                                                            await getFileFromAssets(
-                                                          assetPath: globalTrentAppNotifier!.getImageDownloadQuality() ==
-                                                                  1
-                                                              ? trentCentersDB[
-                                                                      widget
-                                                                          .centerIndex!]!
-                                                                  .trentCenterFloors![
-                                                                      widget
-                                                                          .floorIndex!]!
-                                                                  .rooms![widget
-                                                                      .roomIndex!]!
-                                                                  .findRoomSteps![
-                                                                      findIndex]!
-                                                                  .stepFHDImageAssetPath!
-                                                              : trentCentersDB[
-                                                                      widget
-                                                                          .centerIndex!]!
-                                                                  .trentCenterFloors![
-                                                                      widget
-                                                                          .floorIndex!]!
-                                                                  .rooms![widget
-                                                                      .roomIndex!]!
-                                                                  .findRoomSteps![
-                                                                      findIndex]!
-                                                                  .stepHDImageAssetPath!,
-                                                        ),
-                                                      ))!,
-                                                      albumName:
-                                                          'TrentUClassLocator',
-                                                    );
+                                                  try {
+                                                    if (await Permission.photos
+                                                        .request()
+                                                        .isGranted) {
+                                                      await GallerySaver
+                                                          .saveImage(
+                                                        (await getFilePathFromAssets(
+                                                          file:
+                                                              await getFileFromAssets(
+                                                            assetPath: globalTrentAppNotifier!
+                                                                        .getImageDownloadQuality() ==
+                                                                    1
+                                                                ? trentCentersDB[widget.centerIndex!]!
+                                                                    .trentCenterFloors![
+                                                                        widget
+                                                                            .floorIndex!]!
+                                                                    .rooms![widget
+                                                                        .roomIndex!]!
+                                                                    .findRoomSteps![
+                                                                        findIndex]!
+                                                                    .stepFHDImageAssetPath!
+                                                                : trentCentersDB[widget.centerIndex!]!
+                                                                    .trentCenterFloors![
+                                                                        widget
+                                                                            .floorIndex!]!
+                                                                    .rooms![widget
+                                                                        .roomIndex!]!
+                                                                    .findRoomSteps![
+                                                                        findIndex]!
+                                                                    .stepHDImageAssetPath!,
+                                                          ),
+                                                        ))!,
+                                                        albumName:
+                                                            'TrentUClassLocator',
+                                                      );
+
+                                                      if (context.mounted) {
+                                                        ScaffoldMessenger.of(
+                                                          context,
+                                                        ).showSnackBar(
+                                                          SnackBar(
+                                                            behavior:
+                                                                SnackBarBehavior
+                                                                    .floating,
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(
+                                                              8.0,
+                                                            ),
+                                                            backgroundColor:
+                                                                Theme.of(
+                                                              context,
+                                                            )
+                                                                    .colorScheme
+                                                                    .surface,
+                                                            content: Text(
+                                                              "${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.centerCode} ${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.roomNumber} Step ${findIndex + 1} Image Saved",
+                                                              style: TextStyle(
+                                                                color: Theme.of(
+                                                                  context,
+                                                                )
+                                                                    .colorScheme
+                                                                    .onSurface,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                    }
+                                                  } catch (e) {
+                                                    AnchorElement(
+                                                      href: globalTrentAppNotifier!
+                                                                  .getImageDownloadQuality() ==
+                                                              1
+                                                          ? trentCentersDB[widget.centerIndex!]!
+                                                              .trentCenterFloors![widget
+                                                                  .floorIndex!]!
+                                                              .rooms![widget
+                                                                  .roomIndex!]!
+                                                              .findRoomSteps![
+                                                                  findIndex]!
+                                                              .stepFHDImageAssetPath!
+                                                          : trentCentersDB[
+                                                                  widget
+                                                                      .centerIndex!]!
+                                                              .trentCenterFloors![
+                                                                  widget
+                                                                      .floorIndex!]!
+                                                              .rooms![widget
+                                                                  .roomIndex!]!
+                                                              .findRoomSteps![
+                                                                  findIndex]!
+                                                              .stepHDImageAssetPath!,
+                                                    )
+                                                      ..setAttribute(
+                                                        'download',
+                                                        globalTrentAppNotifier!
+                                                                    .getImageDownloadQuality() ==
+                                                                1
+                                                            ? trentCentersDB[
+                                                                    widget
+                                                                        .centerIndex!]!
+                                                                .trentCenterFloors![
+                                                                    widget
+                                                                        .floorIndex!]!
+                                                                .rooms![widget
+                                                                    .roomIndex!]!
+                                                                .findRoomSteps![
+                                                                    findIndex]!
+                                                                .stepFHDImageAssetPath!
+                                                                .split(
+                                                                  '/',
+                                                                )[-1]
+                                                            : trentCentersDB[
+                                                                    widget
+                                                                        .centerIndex!]!
+                                                                .trentCenterFloors![
+                                                                    widget
+                                                                        .floorIndex!]!
+                                                                .rooms![widget
+                                                                    .roomIndex!]!
+                                                                .findRoomSteps![
+                                                                    findIndex]!
+                                                                .stepHDImageAssetPath!
+                                                                .split('/')[-1],
+                                                      )
+                                                      ..click();
 
                                                     if (context.mounted) {
                                                       ScaffoldMessenger.of(
@@ -251,7 +349,7 @@ class _TrentFindState extends State<TrentFind> {
                                                             context,
                                                           ).colorScheme.surface,
                                                           content: Text(
-                                                            "${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.centerCode} ${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.roomNumber} Step ${findIndex + 1} Image Saved",
+                                                            "Campus Map v2 Saved",
                                                             style: TextStyle(
                                                               color: Theme.of(
                                                                 context,

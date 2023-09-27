@@ -1,3 +1,5 @@
+import 'package:universal_html/html.dart';
+
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -101,8 +103,13 @@ class _TrentCenterState extends State<TrentCenter> {
                                             trentCentersDB[widget.centerIndex!]!
                                                 .hDImageAssetPath!,
                                             width: MediaQuery.of(
-                                              context,
-                                            ).size.width,
+                                                      context,
+                                                    ).size.width >
+                                                    550.0
+                                                ? 550.0
+                                                : MediaQuery.of(
+                                                    context,
+                                                  ).size.width,
                                           ),
                                         ),
                                         const SizedBox(
@@ -110,20 +117,76 @@ class _TrentCenterState extends State<TrentCenter> {
                                         ),
                                         ElevatedButton(
                                           onPressed: () async {
-                                            if (await Permission.photos
-                                                .request()
-                                                .isGranted) {
-                                              await GallerySaver.saveImage(
-                                                (await getFilePathFromAssets(
-                                                  file: await getFileFromAssets(
-                                                    assetPath: trentCentersDB[
-                                                            widget
-                                                                .centerIndex!]!
-                                                        .hDImageAssetPath!,
-                                                  ),
-                                                ))!,
-                                                albumName: 'TrentUClassLocator',
-                                              );
+                                            try {
+                                              if (await Permission.photos
+                                                  .request()
+                                                  .isGranted) {
+                                                await GallerySaver.saveImage(
+                                                  (await getFilePathFromAssets(
+                                                    file:
+                                                        await getFileFromAssets(
+                                                      assetPath: trentCentersDB[
+                                                              widget
+                                                                  .centerIndex!]!
+                                                          .hDImageAssetPath!,
+                                                    ),
+                                                  ))!,
+                                                  albumName:
+                                                      'TrentUClassLocator',
+                                                );
+
+                                                if (context.mounted) {
+                                                  ScaffoldMessenger.of(
+                                                    context,
+                                                  ).showSnackBar(
+                                                    SnackBar(
+                                                      behavior: SnackBarBehavior
+                                                          .floating,
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                        8.0,
+                                                      ),
+                                                      backgroundColor: Theme.of(
+                                                        context,
+                                                      ).colorScheme.surface,
+                                                      content: Text(
+                                                        "${trentCentersDB[widget.centerIndex!]!.trentCenterName!} Image Saved",
+                                                        style: TextStyle(
+                                                          color: Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                          12.0,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                              }
+                                            } catch (e) {
+                                              AnchorElement(
+                                                href: trentCentersDB[
+                                                        widget.centerIndex!]!
+                                                    .hDImageAssetPath!,
+                                              )
+                                                ..setAttribute(
+                                                  'download',
+                                                  trentCentersDB[
+                                                          widget.centerIndex!]!
+                                                      .hDImageAssetPath!
+                                                      .split(
+                                                        '/',
+                                                      )[-1],
+                                                )
+                                                ..click();
 
                                               if (context.mounted) {
                                                 ScaffoldMessenger.of(
@@ -140,18 +203,11 @@ class _TrentCenterState extends State<TrentCenter> {
                                                       context,
                                                     ).colorScheme.surface,
                                                     content: Text(
-                                                      "${trentCentersDB[widget.centerIndex!]!.trentCenterName!} Image Saved",
+                                                      "Campus Map v2 Saved",
                                                       style: TextStyle(
                                                         color: Theme.of(
                                                           context,
                                                         ).colorScheme.onSurface,
-                                                      ),
-                                                    ),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        12.0,
                                                       ),
                                                     ),
                                                   ),

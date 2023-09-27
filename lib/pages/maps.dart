@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:trent_u_class_locator/services/image_file_service/image_file_service.dart';
+import 'package:universal_html/html.dart';
 
 class MapsPage extends StatefulWidget {
   const MapsPage({
@@ -81,8 +82,13 @@ class _MapsPageState extends State<MapsPage> {
                                               child: Image.asset(
                                                 "assets/images/maps/full/trentmap1.jpg",
                                                 width: MediaQuery.of(
-                                                  context,
-                                                ).size.width,
+                                                          context,
+                                                        ).size.width >
+                                                        550.0
+                                                    ? 550.0
+                                                    : MediaQuery.of(
+                                                        context,
+                                                      ).size.width,
                                               ),
                                             ),
                                             const SizedBox(
@@ -90,20 +96,64 @@ class _MapsPageState extends State<MapsPage> {
                                             ),
                                             ElevatedButton(
                                               onPressed: () async {
-                                                if (await Permission.photos
-                                                    .request()
-                                                    .isGranted) {
-                                                  await GallerySaver.saveImage(
-                                                    (await getFilePathFromAssets(
-                                                      file:
-                                                          await getFileFromAssets(
-                                                        assetPath:
-                                                            "assets/images/maps/full/trentmap1.jpg",
-                                                      ),
-                                                    ))!,
-                                                    albumName:
-                                                        'TrentUClassLocator',
-                                                  );
+                                                try {
+                                                  if (await Permission.photos
+                                                      .request()
+                                                      .isGranted) {
+                                                    await GallerySaver
+                                                        .saveImage(
+                                                      (await getFilePathFromAssets(
+                                                        file:
+                                                            await getFileFromAssets(
+                                                          assetPath:
+                                                              "assets/images/maps/full/trentmap1.jpg",
+                                                        ),
+                                                      ))!,
+                                                      albumName:
+                                                          'TrentUClassLocator',
+                                                    );
+
+                                                    if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        SnackBar(
+                                                          behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .all(
+                                                            8.0,
+                                                          ),
+                                                          backgroundColor:
+                                                              Theme.of(
+                                                            context,
+                                                          ).colorScheme.surface,
+                                                          content: Text(
+                                                            "Campus Map Saved",
+                                                            style: TextStyle(
+                                                              color: Theme.of(
+                                                                context,
+                                                              )
+                                                                  .colorScheme
+                                                                  .onSurface,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  }
+                                                } catch (e) {
+                                                  AnchorElement(
+                                                    href:
+                                                        "assets/images/maps/full/trentmap1.jpg",
+                                                  )
+                                                    ..setAttribute(
+                                                      'download',
+                                                      'trentmap1.jpg',
+                                                    )
+                                                    ..click();
 
                                                   if (context.mounted) {
                                                     ScaffoldMessenger.of(
@@ -122,7 +172,7 @@ class _MapsPageState extends State<MapsPage> {
                                                           context,
                                                         ).colorScheme.surface,
                                                         content: Text(
-                                                          "Campus Map Saved",
+                                                          "Campus Map v2 Saved",
                                                           style: TextStyle(
                                                             color: Theme.of(
                                                               context,
@@ -203,8 +253,13 @@ class _MapsPageState extends State<MapsPage> {
                                             child: Image.asset(
                                               "assets/images/maps/full/trentmap2.jpg",
                                               width: MediaQuery.of(
-                                                context,
-                                              ).size.width,
+                                                        context,
+                                                      ).size.width >
+                                                      550.0
+                                                  ? 550.0
+                                                  : MediaQuery.of(
+                                                      context,
+                                                    ).size.width,
                                             ),
                                           ),
                                           const SizedBox(
@@ -212,20 +267,62 @@ class _MapsPageState extends State<MapsPage> {
                                           ),
                                           ElevatedButton(
                                             onPressed: () async {
-                                              if (await Permission.photos
-                                                  .request()
-                                                  .isGranted) {
-                                                await GallerySaver.saveImage(
-                                                  (await getFilePathFromAssets(
-                                                    file:
-                                                        await getFileFromAssets(
-                                                      assetPath:
-                                                          "assets/images/maps/full/trentmap2.jpg",
-                                                    ),
-                                                  ))!,
-                                                  albumName:
-                                                      'TrentUClassLocator',
-                                                );
+                                              try {
+                                                if (await Permission.photos
+                                                    .request()
+                                                    .isGranted) {
+                                                  await GallerySaver.saveImage(
+                                                    (await getFilePathFromAssets(
+                                                      file:
+                                                          await getFileFromAssets(
+                                                        assetPath:
+                                                            "assets/images/maps/full/trentmap2.jpg",
+                                                      ),
+                                                    ))!,
+                                                    albumName:
+                                                        'TrentUClassLocator',
+                                                  );
+
+                                                  if (context.mounted) {
+                                                    ScaffoldMessenger.of(
+                                                      context,
+                                                    ).showSnackBar(
+                                                      SnackBar(
+                                                        behavior:
+                                                            SnackBarBehavior
+                                                                .floating,
+                                                        margin: const EdgeInsets
+                                                            .all(
+                                                          8.0,
+                                                        ),
+                                                        backgroundColor:
+                                                            Theme.of(
+                                                          context,
+                                                        ).colorScheme.surface,
+                                                        content: Text(
+                                                          "Campus Map v2 Saved",
+                                                          style: TextStyle(
+                                                            color: Theme.of(
+                                                              context,
+                                                            )
+                                                                .colorScheme
+                                                                .onSurface,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                }
+                                              } catch (e) {
+                                                AnchorElement(
+                                                  href:
+                                                      "assets/images/maps/full/trentmap2.jpg",
+                                                )
+                                                  ..setAttribute(
+                                                    'download',
+                                                    'trentmap2.jpg',
+                                                  )
+                                                  ..click();
 
                                                 if (context.mounted) {
                                                   ScaffoldMessenger.of(
@@ -322,8 +419,13 @@ class _MapsPageState extends State<MapsPage> {
                                               child: Image.asset(
                                                 "assets/images/maps/full/aerialview.jpg",
                                                 width: MediaQuery.of(
-                                                  context,
-                                                ).size.width,
+                                                          context,
+                                                        ).size.width >
+                                                        550.0
+                                                    ? 550.0
+                                                    : MediaQuery.of(
+                                                        context,
+                                                      ).size.width,
                                               ),
                                             ),
                                             const SizedBox(
@@ -331,20 +433,64 @@ class _MapsPageState extends State<MapsPage> {
                                             ),
                                             ElevatedButton(
                                               onPressed: () async {
-                                                if (await Permission.photos
-                                                    .request()
-                                                    .isGranted) {
-                                                  await GallerySaver.saveImage(
-                                                    (await getFilePathFromAssets(
-                                                      file:
-                                                          await getFileFromAssets(
-                                                        assetPath:
-                                                            "assets/images/maps/full/aerialview.jpg",
-                                                      ),
-                                                    ))!,
-                                                    albumName:
-                                                        'TrentUClassLocator',
-                                                  );
+                                                try {
+                                                  if (await Permission.photos
+                                                      .request()
+                                                      .isGranted) {
+                                                    await GallerySaver
+                                                        .saveImage(
+                                                      (await getFilePathFromAssets(
+                                                        file:
+                                                            await getFileFromAssets(
+                                                          assetPath:
+                                                              "assets/images/maps/full/aerialview.jpg",
+                                                        ),
+                                                      ))!,
+                                                      albumName:
+                                                          'TrentUClassLocator',
+                                                    );
+
+                                                    if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        SnackBar(
+                                                          behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .all(
+                                                            8.0,
+                                                          ),
+                                                          backgroundColor:
+                                                              Theme.of(
+                                                            context,
+                                                          ).colorScheme.surface,
+                                                          content: Text(
+                                                            "Aerial View Image Saved",
+                                                            style: TextStyle(
+                                                              color: Theme.of(
+                                                                context,
+                                                              )
+                                                                  .colorScheme
+                                                                  .onSurface,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  }
+                                                } catch (e) {
+                                                  AnchorElement(
+                                                    href:
+                                                        "assets/images/maps/full/aerialview.jpg",
+                                                  )
+                                                    ..setAttribute(
+                                                      'download',
+                                                      'aerialview.jpg',
+                                                    )
+                                                    ..click();
 
                                                   if (context.mounted) {
                                                     ScaffoldMessenger.of(
@@ -363,7 +509,7 @@ class _MapsPageState extends State<MapsPage> {
                                                           context,
                                                         ).colorScheme.surface,
                                                         content: Text(
-                                                          "Aerial View Image Saved",
+                                                          "Campus Map v2 Saved",
                                                           style: TextStyle(
                                                             color: Theme.of(
                                                               context,
@@ -444,8 +590,13 @@ class _MapsPageState extends State<MapsPage> {
                                               child: Image.asset(
                                                 "assets/images/maps/full/trentmap3.jpg",
                                                 width: MediaQuery.of(
-                                                  context,
-                                                ).size.width,
+                                                          context,
+                                                        ).size.width >
+                                                        550.0
+                                                    ? 550.0
+                                                    : MediaQuery.of(
+                                                        context,
+                                                      ).size.width,
                                               ),
                                             ),
                                             const SizedBox(
@@ -453,20 +604,64 @@ class _MapsPageState extends State<MapsPage> {
                                             ),
                                             ElevatedButton(
                                               onPressed: () async {
-                                                if (await Permission.photos
-                                                    .request()
-                                                    .isGranted) {
-                                                  await GallerySaver.saveImage(
-                                                    (await getFilePathFromAssets(
-                                                      file:
-                                                          await getFileFromAssets(
-                                                        assetPath:
-                                                            "assets/images/maps/full/trentmap3.jpg",
-                                                      ),
-                                                    ))!,
-                                                    albumName:
-                                                        'TrentUClassLocator',
-                                                  );
+                                                try {
+                                                  if (await Permission.photos
+                                                      .request()
+                                                      .isGranted) {
+                                                    await GallerySaver
+                                                        .saveImage(
+                                                      (await getFilePathFromAssets(
+                                                        file:
+                                                            await getFileFromAssets(
+                                                          assetPath:
+                                                              "assets/images/maps/full/trentmap3.jpg",
+                                                        ),
+                                                      ))!,
+                                                      albumName:
+                                                          'TrentUClassLocator',
+                                                    );
+
+                                                    if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        SnackBar(
+                                                          behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .all(
+                                                            8.0,
+                                                          ),
+                                                          backgroundColor:
+                                                              Theme.of(
+                                                            context,
+                                                          ).colorScheme.surface,
+                                                          content: Text(
+                                                            "Traill Campus Map Saved",
+                                                            style: TextStyle(
+                                                              color: Theme.of(
+                                                                context,
+                                                              )
+                                                                  .colorScheme
+                                                                  .onSurface,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  }
+                                                } catch (e) {
+                                                  AnchorElement(
+                                                    href:
+                                                        "assets/images/maps/full/trentmap3.jpg",
+                                                  )
+                                                    ..setAttribute(
+                                                      'download',
+                                                      'trentmap3.jpg',
+                                                    )
+                                                    ..click();
 
                                                   if (context.mounted) {
                                                     ScaffoldMessenger.of(
@@ -485,7 +680,7 @@ class _MapsPageState extends State<MapsPage> {
                                                           context,
                                                         ).colorScheme.surface,
                                                         content: Text(
-                                                          "Traill Campus Map Saved",
+                                                          "Campus Map v2 Saved",
                                                           style: TextStyle(
                                                             color: Theme.of(
                                                               context,

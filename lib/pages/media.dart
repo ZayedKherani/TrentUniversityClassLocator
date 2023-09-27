@@ -1,3 +1,5 @@
+import 'package:universal_html/html.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -140,8 +142,13 @@ class _MediaPageState extends State<MediaPage> {
                                                           map.value!
                                                               .hDImageAssetPath!,
                                                           width: MediaQuery.of(
-                                                            context,
-                                                          ).size.width,
+                                                                    context,
+                                                                  ).size.width >
+                                                                  550.0
+                                                              ? 550.0
+                                                              : MediaQuery.of(
+                                                                  context,
+                                                                ).size.width,
                                                         ),
                                                       ),
                                                       const SizedBox(
@@ -149,23 +156,74 @@ class _MediaPageState extends State<MediaPage> {
                                                       ),
                                                       ElevatedButton(
                                                         onPressed: () async {
-                                                          if (await Permission
-                                                              .photos
-                                                              .request()
-                                                              .isGranted) {
-                                                            await GallerySaver
-                                                                .saveImage(
-                                                              (await getFilePathFromAssets(
-                                                                file:
-                                                                    await getFileFromAssets(
-                                                                  assetPath: map
-                                                                      .value!
-                                                                      .hDImageAssetPath!,
-                                                                ),
-                                                              ))!,
-                                                              albumName:
-                                                                  'TrentUClassLocator',
-                                                            );
+                                                          try {
+                                                            if (await Permission
+                                                                .photos
+                                                                .request()
+                                                                .isGranted) {
+                                                              await GallerySaver
+                                                                  .saveImage(
+                                                                (await getFilePathFromAssets(
+                                                                  file:
+                                                                      await getFileFromAssets(
+                                                                    assetPath: map
+                                                                        .value!
+                                                                        .hDImageAssetPath!,
+                                                                  ),
+                                                                ))!,
+                                                                albumName:
+                                                                    'TrentUClassLocator',
+                                                              );
+
+                                                              if (context
+                                                                  .mounted) {
+                                                                ScaffoldMessenger
+                                                                    .of(
+                                                                  context,
+                                                                ).showSnackBar(
+                                                                  SnackBar(
+                                                                    behavior:
+                                                                        SnackBarBehavior
+                                                                            .floating,
+                                                                    margin:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                      8.0,
+                                                                    ),
+                                                                    backgroundColor:
+                                                                        Theme
+                                                                            .of(
+                                                                      context,
+                                                                    ).colorScheme.surface,
+                                                                    content:
+                                                                        Text(
+                                                                      "${map.value!.trentCenterName!} Image Saved",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Theme
+                                                                            .of(
+                                                                          context,
+                                                                        ).colorScheme.onSurface,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                            }
+                                                          } catch (e) {
+                                                            AnchorElement(
+                                                              href: map.value!
+                                                                  .hDImageAssetPath!,
+                                                            )
+                                                              ..setAttribute(
+                                                                'download',
+                                                                map.value!
+                                                                    .hDImageAssetPath!
+                                                                    .split(
+                                                                  '/',
+                                                                )[-1],
+                                                              )
+                                                              ..click();
 
                                                             if (context
                                                                 .mounted) {
@@ -187,7 +245,7 @@ class _MediaPageState extends State<MediaPage> {
                                                                     context,
                                                                   ).colorScheme.surface,
                                                                   content: Text(
-                                                                    "${map.value!.trentCenterName!} Image Saved",
+                                                                    "Campus Map v2 Saved",
                                                                     style:
                                                                         TextStyle(
                                                                       color: Theme
@@ -366,10 +424,17 @@ class _MediaPageState extends State<MediaPage> {
                                                                     .fHDImageAssetPath!
                                                                 : map.value!
                                                                     .hDImageAssetPath!,
-                                                            width:
-                                                                MediaQuery.of(
-                                                              context,
-                                                            ).size.width,
+                                                            width: MediaQuery
+                                                                            .of(
+                                                                      context,
+                                                                    )
+                                                                        .size
+                                                                        .width >
+                                                                    550.0
+                                                                ? 550.0
+                                                                : MediaQuery.of(
+                                                                    context,
+                                                                  ).size.width,
                                                           ),
                                                         ),
                                                         const SizedBox(
@@ -377,28 +442,92 @@ class _MediaPageState extends State<MediaPage> {
                                                         ),
                                                         ElevatedButton(
                                                           onPressed: () async {
-                                                            if (await Permission
-                                                                .photos
-                                                                .request()
-                                                                .isGranted) {
-                                                              await GallerySaver
-                                                                  .saveImage(
-                                                                (await getFilePathFromAssets(
-                                                                  file:
-                                                                      await getFileFromAssets(
-                                                                    assetPath: globalTrentAppNotifier!.getImageDownloadQuality() ==
-                                                                            1
-                                                                        ? map
-                                                                            .value!
-                                                                            .fHDImageAssetPath!
-                                                                        : map
-                                                                            .value!
-                                                                            .hDImageAssetPath!,
-                                                                  ),
-                                                                ))!,
-                                                                albumName:
-                                                                    'TrentUClassLocator',
-                                                              );
+                                                            try {
+                                                              if (await Permission
+                                                                  .photos
+                                                                  .request()
+                                                                  .isGranted) {
+                                                                await GallerySaver
+                                                                    .saveImage(
+                                                                  (await getFilePathFromAssets(
+                                                                    file:
+                                                                        await getFileFromAssets(
+                                                                      assetPath: globalTrentAppNotifier!.getImageDownloadQuality() == 1
+                                                                          ? map
+                                                                              .value!
+                                                                              .fHDImageAssetPath!
+                                                                          : map
+                                                                              .value!
+                                                                              .hDImageAssetPath!,
+                                                                    ),
+                                                                  ))!,
+                                                                  albumName:
+                                                                      'TrentUClassLocator',
+                                                                );
+
+                                                                if (context
+                                                                    .mounted) {
+                                                                  ScaffoldMessenger
+                                                                      .of(
+                                                                    context,
+                                                                  ).showSnackBar(
+                                                                    SnackBar(
+                                                                      behavior:
+                                                                          SnackBarBehavior
+                                                                              .floating,
+                                                                      margin:
+                                                                          const EdgeInsets
+                                                                              .all(
+                                                                        8.0,
+                                                                      ),
+                                                                      backgroundColor:
+                                                                          Theme
+                                                                              .of(
+                                                                        context,
+                                                                      ).colorScheme.surface,
+                                                                      content:
+                                                                          Text(
+                                                                        "${map.value!.centerCode} ${map.value!.roomNumber!} Image Saved",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Theme.of(
+                                                                            context,
+                                                                          ).colorScheme.onSurface,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                              }
+                                                            } catch (e) {
+                                                              AnchorElement(
+                                                                href: globalTrentAppNotifier!
+                                                                            .getImageDownloadQuality() ==
+                                                                        1
+                                                                    ? map.value!
+                                                                        .fHDImageAssetPath!
+                                                                    : map.value!
+                                                                        .hDImageAssetPath!,
+                                                              )
+                                                                ..setAttribute(
+                                                                  'download',
+                                                                  globalTrentAppNotifier!
+                                                                              .getImageDownloadQuality() ==
+                                                                          1
+                                                                      ? map
+                                                                          .value!
+                                                                          .fHDImageAssetPath!
+                                                                          .split(
+                                                                          '/',
+                                                                        )[-1]
+                                                                      : map
+                                                                          .value!
+                                                                          .hDImageAssetPath!
+                                                                          .split(
+                                                                              '/')[-1],
+                                                                )
+                                                                ..click();
 
                                                               if (context
                                                                   .mounted) {
@@ -422,7 +551,7 @@ class _MediaPageState extends State<MediaPage> {
                                                                     ).colorScheme.surface,
                                                                     content:
                                                                         Text(
-                                                                      "${map.value!.centerCode} ${map.value!.roomNumber!} Image Saved",
+                                                                      "Campus Map v2 Saved",
                                                                       style:
                                                                           TextStyle(
                                                                         color: Theme
@@ -508,7 +637,7 @@ class _MediaPageState extends State<MediaPage> {
                           ),
                           CarouselSlider(
                             options: CarouselOptions(
-                              height: 155.0,
+                              height: 180.0,
                               enableInfiniteScroll: true,
                               animateToClosest: true,
                               autoPlay: false,
@@ -612,10 +741,17 @@ class _MediaPageState extends State<MediaPage> {
                                                           ),
                                                           child: Image.asset(
                                                             map.value![0]!,
-                                                            width:
-                                                                MediaQuery.of(
-                                                              context,
-                                                            ).size.width,
+                                                            width: MediaQuery
+                                                                            .of(
+                                                                      context,
+                                                                    )
+                                                                        .size
+                                                                        .width >
+                                                                    550.0
+                                                                ? 550.0
+                                                                : MediaQuery.of(
+                                                                    context,
+                                                                  ).size.width,
                                                           ),
                                                         ),
                                                         const SizedBox(
@@ -623,23 +759,74 @@ class _MediaPageState extends State<MediaPage> {
                                                         ),
                                                         ElevatedButton(
                                                           onPressed: () async {
-                                                            if (await Permission
-                                                                .photos
-                                                                .request()
-                                                                .isGranted) {
-                                                              await GallerySaver
-                                                                  .saveImage(
-                                                                (await getFilePathFromAssets(
-                                                                  file:
-                                                                      await getFileFromAssets(
-                                                                    assetPath:
+                                                            try {
+                                                              if (await Permission
+                                                                  .photos
+                                                                  .request()
+                                                                  .isGranted) {
+                                                                await GallerySaver
+                                                                    .saveImage(
+                                                                  (await getFilePathFromAssets(
+                                                                    file:
+                                                                        await getFileFromAssets(
+                                                                      assetPath:
+                                                                          map.value![
+                                                                              0]!,
+                                                                    ),
+                                                                  ))!,
+                                                                  albumName:
+                                                                      'TrentUClassLocator',
+                                                                );
+
+                                                                if (context
+                                                                    .mounted) {
+                                                                  ScaffoldMessenger
+                                                                      .of(
+                                                                    context,
+                                                                  ).showSnackBar(
+                                                                    SnackBar(
+                                                                      behavior:
+                                                                          SnackBarBehavior
+                                                                              .floating,
+                                                                      margin:
+                                                                          const EdgeInsets
+                                                                              .all(
+                                                                        8.0,
+                                                                      ),
+                                                                      backgroundColor:
+                                                                          Theme
+                                                                              .of(
+                                                                        context,
+                                                                      ).colorScheme.surface,
+                                                                      content:
+                                                                          Text(
                                                                         map.value![
-                                                                            0]!,
-                                                                  ),
-                                                                ))!,
-                                                                albumName:
-                                                                    'TrentUClassLocator',
-                                                              );
+                                                                            3]!,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Theme.of(
+                                                                            context,
+                                                                          ).colorScheme.onSurface,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                              }
+                                                            } catch (e) {
+                                                              AnchorElement(
+                                                                href: map
+                                                                    .value![0]!,
+                                                              )
+                                                                ..setAttribute(
+                                                                  'download',
+                                                                  map.value![0]!
+                                                                      .split(
+                                                                    '/',
+                                                                  )[-1],
+                                                                )
+                                                                ..click();
 
                                                               if (context
                                                                   .mounted) {
@@ -663,8 +850,7 @@ class _MediaPageState extends State<MediaPage> {
                                                                     ).colorScheme.surface,
                                                                     content:
                                                                         Text(
-                                                                      map.value![
-                                                                          3]!,
+                                                                      "Campus Map v2 Saved",
                                                                       style:
                                                                           TextStyle(
                                                                         color: Theme
@@ -1012,84 +1198,155 @@ class _MediaPageState extends State<MediaPage> {
                                                       child: Image.asset(
                                                         map.value![11]!,
                                                         width: MediaQuery.of(
-                                                          context,
-                                                        ).size.width,
+                                                                  context,
+                                                                ).size.width >
+                                                                550.0
+                                                            ? 550.0
+                                                            : MediaQuery.of(
+                                                                context,
+                                                              ).size.width,
                                                       ),
                                                     ),
                                                     const SizedBox(
                                                       height: 10.0,
                                                     ),
-                                                    ListView.builder(
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      itemCount: 5,
-                                                      itemBuilder: (
-                                                        BuildContext? context,
-                                                        int? resolutionIndex,
-                                                      ) =>
-                                                          ElevatedButton(
-                                                        onPressed: () async {
-                                                          if (await Permission
-                                                              .photos
-                                                              .request()
-                                                              .isGranted) {
-                                                            await GallerySaver
-                                                                .saveImage(
-                                                              (await getFilePathFromAssets(
-                                                                file:
-                                                                    await getFileFromAssets(
-                                                                  assetPath: map
-                                                                          .value![
-                                                                      (resolutionIndex *
+                                                    SizedBox(
+                                                      width: MediaQuery.of(
+                                                                context,
+                                                              ).size.width >
+                                                              550.0
+                                                          ? 550.0
+                                                          : MediaQuery.of(
+                                                              context,
+                                                            ).size.width,
+                                                      child: ListView.builder(
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        itemCount: 5,
+                                                        itemBuilder: (
+                                                          BuildContext? context,
+                                                          int? resolutionIndex,
+                                                        ) =>
+                                                            ElevatedButton(
+                                                          onPressed: () async {
+                                                            try {
+                                                              if (await Permission
+                                                                  .photos
+                                                                  .request()
+                                                                  .isGranted) {
+                                                                await GallerySaver
+                                                                    .saveImage(
+                                                                  (await getFilePathFromAssets(
+                                                                    file:
+                                                                        await getFileFromAssets(
+                                                                      assetPath: map
+                                                                          .value![(resolutionIndex *
                                                                               2) +
                                                                           1]!,
-                                                                ),
-                                                              ))!,
-                                                              albumName:
-                                                                  'TrentUClassLocator',
-                                                            );
+                                                                    ),
+                                                                  ))!,
+                                                                  albumName:
+                                                                      'TrentUClassLocator',
+                                                                );
 
-                                                            if (context !=
-                                                                    null &&
-                                                                context
-                                                                    .mounted) {
-                                                              ScaffoldMessenger
-                                                                  .of(
-                                                                context,
-                                                              ).showSnackBar(
-                                                                SnackBar(
-                                                                  behavior:
-                                                                      SnackBarBehavior
-                                                                          .floating,
-                                                                  margin:
-                                                                      const EdgeInsets
-                                                                          .all(
-                                                                    8.0,
-                                                                  ),
-                                                                  backgroundColor:
-                                                                      Theme.of(
+                                                                if (context !=
+                                                                        null &&
+                                                                    context
+                                                                        .mounted) {
+                                                                  ScaffoldMessenger
+                                                                      .of(
                                                                     context,
-                                                                  ).colorScheme.surface,
-                                                                  content: Text(
-                                                                    "${map.value![resolutionIndex * 2]!} Image Saved",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Theme
+                                                                  ).showSnackBar(
+                                                                    SnackBar(
+                                                                      behavior:
+                                                                          SnackBarBehavior
+                                                                              .floating,
+                                                                      margin:
+                                                                          const EdgeInsets
+                                                                              .all(
+                                                                        8.0,
+                                                                      ),
+                                                                      backgroundColor:
+                                                                          Theme
                                                                               .of(
                                                                         context,
-                                                                      )
-                                                                          .colorScheme
-                                                                          .onSurface,
+                                                                      ).colorScheme.surface,
+                                                                      content:
+                                                                          Text(
+                                                                        "${map.value![resolutionIndex * 2]!} Image Saved",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Theme.of(
+                                                                            context,
+                                                                          ).colorScheme.onSurface,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                              }
+                                                            } catch (e) {
+                                                              AnchorElement(
+                                                                href: map
+                                                                        .value![
+                                                                    (resolutionIndex *
+                                                                            2) +
+                                                                        1]!,
+                                                              )
+                                                                ..setAttribute(
+                                                                  'download',
+                                                                  map.value![(resolutionIndex *
+                                                                              2) +
+                                                                          1]!
+                                                                      .split(
+                                                                    '/',
+                                                                  )[-1],
+                                                                )
+                                                                ..click();
+
+                                                              if (context !=
+                                                                      null &&
+                                                                  context
+                                                                      .mounted) {
+                                                                ScaffoldMessenger
+                                                                    .of(
+                                                                  context,
+                                                                ).showSnackBar(
+                                                                  SnackBar(
+                                                                    behavior:
+                                                                        SnackBarBehavior
+                                                                            .floating,
+                                                                    margin:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                      8.0,
+                                                                    ),
+                                                                    backgroundColor:
+                                                                        Theme
+                                                                            .of(
+                                                                      context,
+                                                                    ).colorScheme.surface,
+                                                                    content:
+                                                                        Text(
+                                                                      "Campus Map v2 Saved",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Theme
+                                                                            .of(
+                                                                          context,
+                                                                        ).colorScheme.onSurface,
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              );
+                                                                );
+                                                              }
                                                             }
-                                                          }
-                                                        },
-                                                        child: Text(
-                                                          "Save ${map.value![resolutionIndex! * 2]!} Image",
+                                                          },
+                                                          child: Text(
+                                                            "Save ${map.value![resolutionIndex! * 2]!} Image",
+                                                          ),
                                                         ),
                                                       ),
                                                     ),

@@ -1,3 +1,5 @@
+import 'package:universal_html/html.dart';
+
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -118,8 +120,13 @@ class _TrentRoomState extends State<TrentRoom> {
                                                     .rooms![widget.roomIndex!]!
                                                     .hDImageAssetPath!,
                                             width: MediaQuery.of(
-                                              context,
-                                            ).size.width,
+                                                      context,
+                                                    ).size.width >
+                                                    550.0
+                                                ? 550.0
+                                                : MediaQuery.of(
+                                                    context,
+                                                  ).size.width,
                                           ),
                                         ),
                                         const SizedBox(
@@ -127,37 +134,127 @@ class _TrentRoomState extends State<TrentRoom> {
                                         ),
                                         ElevatedButton(
                                           onPressed: () async {
-                                            if (await Permission.photos
-                                                .request()
-                                                .isGranted) {
-                                              await GallerySaver.saveImage(
-                                                (await getFilePathFromAssets(
-                                                  file: await getFileFromAssets(
-                                                    assetPath: globalTrentAppNotifier!
-                                                                .getImageDownloadQuality() ==
-                                                            1
-                                                        ? trentCentersDB[
-                                                                widget
-                                                                    .centerIndex!]!
-                                                            .trentCenterFloors![
-                                                                widget
-                                                                    .floorIndex!]!
-                                                            .rooms![widget
-                                                                .roomIndex!]!
-                                                            .fHDImageAssetPath!
-                                                        : trentCentersDB[
-                                                                widget
-                                                                    .centerIndex!]!
-                                                            .trentCenterFloors![
-                                                                widget
-                                                                    .floorIndex!]!
-                                                            .rooms![widget
-                                                                .roomIndex!]!
-                                                            .hDImageAssetPath!,
-                                                  ),
-                                                ))!,
-                                                albumName: 'TrentUClassLocator',
-                                              );
+                                            try {
+                                              if (await Permission.photos
+                                                  .request()
+                                                  .isGranted) {
+                                                await GallerySaver.saveImage(
+                                                  (await getFilePathFromAssets(
+                                                    file:
+                                                        await getFileFromAssets(
+                                                      assetPath: globalTrentAppNotifier!
+                                                                  .getImageDownloadQuality() ==
+                                                              1
+                                                          ? trentCentersDB[
+                                                                  widget
+                                                                      .centerIndex!]!
+                                                              .trentCenterFloors![
+                                                                  widget
+                                                                      .floorIndex!]!
+                                                              .rooms![
+                                                                  widget
+                                                                      .roomIndex!]!
+                                                              .fHDImageAssetPath!
+                                                          : trentCentersDB[
+                                                                  widget
+                                                                      .centerIndex!]!
+                                                              .trentCenterFloors![
+                                                                  widget
+                                                                      .floorIndex!]!
+                                                              .rooms![widget
+                                                                  .roomIndex!]!
+                                                              .hDImageAssetPath!,
+                                                    ),
+                                                  ))!,
+                                                  albumName:
+                                                      'TrentUClassLocator',
+                                                );
+
+                                                if (context.mounted) {
+                                                  ScaffoldMessenger.of(
+                                                    context,
+                                                  ).showSnackBar(
+                                                    SnackBar(
+                                                      behavior: SnackBarBehavior
+                                                          .floating,
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                        8.0,
+                                                      ),
+                                                      backgroundColor: Theme.of(
+                                                        context,
+                                                      ).colorScheme.surface,
+                                                      content: Text(
+                                                        "${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.centerCode} ${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.roomNumber} Image Saved",
+                                                        style: TextStyle(
+                                                          color: Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                          12.0,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                              }
+                                            } catch (e) {
+                                              AnchorElement(
+                                                href: globalTrentAppNotifier!
+                                                            .getImageDownloadQuality() ==
+                                                        1
+                                                    ? trentCentersDB[widget
+                                                            .centerIndex!]!
+                                                        .trentCenterFloors![
+                                                            widget.floorIndex!]!
+                                                        .rooms![
+                                                            widget.roomIndex!]!
+                                                        .fHDImageAssetPath!
+                                                    : trentCentersDB[widget
+                                                            .centerIndex!]!
+                                                        .trentCenterFloors![
+                                                            widget.floorIndex!]!
+                                                        .rooms![
+                                                            widget.roomIndex!]!
+                                                        .hDImageAssetPath!,
+                                              )
+                                                ..setAttribute(
+                                                  'download',
+                                                  globalTrentAppNotifier!
+                                                              .getImageDownloadQuality() ==
+                                                          1
+                                                      ? trentCentersDB[widget
+                                                              .centerIndex!]!
+                                                          .trentCenterFloors![
+                                                              widget
+                                                                  .floorIndex!]!
+                                                          .rooms![widget
+                                                              .roomIndex!]!
+                                                          .fHDImageAssetPath!
+                                                          .split(
+                                                            '/',
+                                                          )[-1]
+                                                      : trentCentersDB[widget
+                                                              .centerIndex!]!
+                                                          .trentCenterFloors![
+                                                              widget
+                                                                  .floorIndex!]!
+                                                          .rooms![widget
+                                                              .roomIndex!]!
+                                                          .hDImageAssetPath!
+                                                          .split(
+                                                            '/',
+                                                          )[-1],
+                                                )
+                                                ..click();
 
                                               if (context.mounted) {
                                                 ScaffoldMessenger.of(
@@ -174,18 +271,11 @@ class _TrentRoomState extends State<TrentRoom> {
                                                       context,
                                                     ).colorScheme.surface,
                                                     content: Text(
-                                                      "${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.centerCode} ${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.roomNumber} Image Saved",
+                                                      "Campus Map v2 Saved",
                                                       style: TextStyle(
                                                         color: Theme.of(
                                                           context,
                                                         ).colorScheme.onSurface,
-                                                      ),
-                                                    ),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        12.0,
                                                       ),
                                                     ),
                                                   ),
@@ -262,14 +352,19 @@ class _TrentRoomState extends State<TrentRoom> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Card(
                               child: SizedBox(
                                 width: MediaQuery.of(
-                                      context!,
-                                    ).size.width /
-                                    2.4,
+                                          context!,
+                                        ).size.width >
+                                        550.0
+                                    ? 490.0 / 2
+                                    : MediaQuery.of(
+                                          context,
+                                        ).size.width /
+                                        2.4,
                                 child: Column(
                                   children: [
                                     const Center(
@@ -303,9 +398,14 @@ class _TrentRoomState extends State<TrentRoom> {
                             Card(
                               child: SizedBox(
                                 width: MediaQuery.of(
-                                      context,
-                                    ).size.width /
-                                    2.4,
+                                          context,
+                                        ).size.width >
+                                        550.0
+                                    ? 490.0 / 2
+                                    : MediaQuery.of(
+                                          context,
+                                        ).size.width /
+                                        2.4,
                                 child: Column(
                                   children: [
                                     const Center(
