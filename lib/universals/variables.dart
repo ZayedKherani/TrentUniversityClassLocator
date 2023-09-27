@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:trent_u_class_find/models/center/center.dart';
-import 'package:trent_u_class_find/models/enums/enums.dart';
-import 'package:trent_u_class_find/models/floor/floor.dart';
-import 'package:trent_u_class_find/models/room/room.dart';
-import 'package:trent_u_class_find/models/step/step.dart';
-import 'package:trent_u_class_find/models/steps/steps.dart';
+import 'package:trent_u_class_locator/models/center/center.dart';
+import 'package:trent_u_class_locator/models/enums/enums.dart';
+import 'package:trent_u_class_locator/models/floor/floor.dart';
+import 'package:trent_u_class_locator/models/room/room.dart';
+import 'package:trent_u_class_locator/models/step/step.dart';
+import 'package:trent_u_class_locator/models/steps/steps.dart';
 
-import 'package:trent_u_class_find/services/theme_mode_notifier_service/theme_mode_notifier_service.dart';
+import 'package:trent_u_class_locator/services/trent_app_notifier_service/trent_app_notifier_service.dart';
 
 ThemeMode? appThemeMode = ThemeMode.system;
 
@@ -16,7 +16,7 @@ int? appThemeSettingsInt = 2;
 int? appImageQualityViewSettingsInt = 1;
 int? appImageQualityDownloadSettingsInt = 1;
 
-ThemeModeNotifierService? globalThemeModeNotifier;
+TrentAppNotifierService? globalTrentAppNotifier;
 
 FocusNode? quickSearchFocusNode;
 

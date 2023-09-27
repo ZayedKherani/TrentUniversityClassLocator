@@ -1,5 +1,5 @@
-name: trent_u_class_find
-description: Trent University Class Find
+name: trent_u_class_locator
+description: Trent University Class Locator
 
 publish_to: "none"
 
@@ -22,6 +22,8 @@ dependencies:
   permission_handler: ^11.0.0
   gallery_saver: ^2.3.2
   path_provider: ^2.1.1
+  font_awesome_flutter: ^10.5.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -37,13 +39,13 @@ flutter_native_splash:
 
   android_screen_orientation: portrait
 
-  color: "#ffffff"
-  color_dark: "#000000"
+  color: "#003F22"
+  color_dark: "#003F22"
 
   fullscreen: true
 
-  # icon_background_color: "#ffffff"
-  # icon_background_color_dark: "#000000"
+  icon_background_color: "#003F22"
+  icon_background_color_dark: "#003F22"
 
   image: assets/icons/splash_icon.png
   image_dark: assets/icons/splash_icon.png
@@ -59,11 +61,11 @@ flutter_native_splash:
   android_12:
     android_gravity: center
 
-    color: "#ffffff"
-    color_dark: "#000000"
+    color: "#003F22"
+    color_dark: "#003F22"
 
-    # icon_background_color: "#ffffff"
-    # icon_background_color_dark: "#000000"
+    icon_background_color: "#003F22"
+    icon_background_color_dark: "#003F22"
 
     image: assets/icons/splash_icon.png
     image_dark: assets/icons/splash_icon.png
@@ -82,6 +84,16 @@ flutter:
     - assets/images/find/720/
     - assets/images/find/1080/
     - assets/images/find/small/
+    - assets/images/maps/
+    - assets/images/maps/small/
+    - assets/images/maps/full/
+    - assets/images/wallpapers/
+    - assets/images/wallpapers/1080/
+    - assets/images/wallpapers/1620/
+    - assets/images/wallpapers/highrez/
+    - assets/images/wallpapers/macretina/
+    - assets/images/wallpapers/w300/
+    - assets/images/wallpapers/widescreen/
 
     - assets/sample.txt
   

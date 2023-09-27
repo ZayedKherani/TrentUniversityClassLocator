@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:trent_u_class_find/pages/buildings/find.dart';
+import 'package:trent_u_class_locator/pages/buildings/find.dart';
 
-import 'package:trent_u_class_find/universals/arguments.dart';
-import 'package:trent_u_class_find/pages/buildings/center.dart';
-import 'package:trent_u_class_find/pages/buildings/floor.dart';
-import 'package:trent_u_class_find/pages/buildings/room.dart';
-import 'package:trent_u_class_find/pages/home.dart';
-import 'package:trent_u_class_find/pages/settings/license_page.dart';
-import 'package:trent_u_class_find/pages/settings/settings.dart';
-import 'package:trent_u_class_find/services/theme_mode_notifier_service/theme_mode_notifier_service.dart';
-import 'package:trent_u_class_find/universals/theme.dart';
-import 'package:trent_u_class_find/pages/settings/package_page.dart';
-import 'package:trent_u_class_find/universals/variables.dart';
+import 'package:trent_u_class_locator/universals/arguments.dart';
+import 'package:trent_u_class_locator/pages/buildings/center.dart';
+import 'package:trent_u_class_locator/pages/buildings/floor.dart';
+import 'package:trent_u_class_locator/pages/buildings/room.dart';
+import 'package:trent_u_class_locator/pages/home.dart';
+import 'package:trent_u_class_locator/pages/settings/license_page.dart';
+import 'package:trent_u_class_locator/pages/settings/settings.dart';
+import 'package:trent_u_class_locator/services/trent_app_notifier_service/trent_app_notifier_service.dart';
+import 'package:trent_u_class_locator/universals/theme.dart';
+import 'package:trent_u_class_locator/pages/settings/package_page.dart';
+import 'package:trent_u_class_locator/universals/variables.dart';
 
 void main() {
   WidgetsBinding? widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -27,26 +27,28 @@ void main() {
   );
 
   runApp(
-    ChangeNotifierProvider<ThemeModeNotifierService>(
+    ChangeNotifierProvider<TrentAppNotifierService>(
       create: (
         BuildContext? context,
       ) =>
-          ThemeModeNotifierService(),
-      child: const TrentClassFindApp(),
+          TrentAppNotifierService(),
+      child: const TrentUniversityClassLocatorApp(),
     ),
   );
 }
 
-class TrentClassFindApp extends StatefulWidget {
-  const TrentClassFindApp({
+class TrentUniversityClassLocatorApp extends StatefulWidget {
+  const TrentUniversityClassLocatorApp({
     super.key,
   });
 
   @override
-  State<TrentClassFindApp> createState() => _TrentClassFindAppState();
+  State<TrentUniversityClassLocatorApp> createState() =>
+      _TrentUniversityClassLocatorAppState();
 }
 
-class _TrentClassFindAppState extends State<TrentClassFindApp> {
+class _TrentUniversityClassLocatorAppState
+    extends State<TrentUniversityClassLocatorApp> {
   @override
   void initState() {
     FlutterNativeSplash.remove();
@@ -58,18 +60,18 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
   Widget build(
     BuildContext? context,
   ) {
-    return Consumer<ThemeModeNotifierService>(
+    return Consumer<TrentAppNotifierService>(
       builder: (
         BuildContext? context,
-        ThemeModeNotifierService? theme,
+        TrentAppNotifierService? theme,
         Widget? child,
       ) {
-        globalThemeModeNotifier = theme;
+        globalTrentAppNotifier = theme;
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           debugShowMaterialGrid: false,
-          title: 'Trent Class Find',
+          title: 'Trent University Class Locator',
           theme: lightTheme!,
           darkTheme: darkTheme!,
           themeMode: theme!.getThemeMode(),
@@ -86,7 +88,7 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
             '/': (
               BuildContext? context,
             ) =>
-                const TrentClassFindHome(),
+                const TrentUniversityClassLocatorHome(),
             '/settings': (
               BuildContext? context,
             ) =>
@@ -100,21 +102,35 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                   settings.arguments as TrentCenterArguments;
 
               return PageTransition(
-                child: MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TrentCenter(
-                            centerIndex: args.centerIndex,
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TrentCenter(
+                              centerIndex: args.centerIndex,
+                            ),
                           ),
+                        )
+                      : TrentCenter(
+                          centerIndex: args.centerIndex,
                         ),
-                      )
-                    : TrentCenter(
-                        centerIndex: args.centerIndex,
-                      ),
+                ),
                 type: PageTransitionType.rightToLeft,
               );
             }
@@ -124,23 +140,37 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                   settings.arguments as TrentFloorArguments;
 
               return PageTransition(
-                child: MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TrentFloor(
-                            centerIndex: args.centerIndex,
-                            floorIndex: args.floorIndex,
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TrentFloor(
+                              centerIndex: args.centerIndex,
+                              floorIndex: args.floorIndex,
+                            ),
                           ),
+                        )
+                      : TrentFloor(
+                          centerIndex: args.centerIndex,
+                          floorIndex: args.floorIndex,
                         ),
-                      )
-                    : TrentFloor(
-                        centerIndex: args.centerIndex,
-                        floorIndex: args.floorIndex,
-                      ),
+                ),
                 type: PageTransitionType.rightToLeft,
               );
             }
@@ -150,25 +180,39 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                   settings.arguments as TrentRoomArguments;
 
               return PageTransition(
-                child: MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TrentRoom(
-                            centerIndex: args.centerIndex,
-                            floorIndex: args.floorIndex,
-                            roomIndex: args.roomIndex,
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TrentRoom(
+                              centerIndex: args.centerIndex,
+                              floorIndex: args.floorIndex,
+                              roomIndex: args.roomIndex,
+                            ),
                           ),
+                        )
+                      : TrentRoom(
+                          centerIndex: args.centerIndex,
+                          floorIndex: args.floorIndex,
+                          roomIndex: args.roomIndex,
                         ),
-                      )
-                    : TrentRoom(
-                        centerIndex: args.centerIndex,
-                        floorIndex: args.floorIndex,
-                        roomIndex: args.roomIndex,
-                      ),
+                ),
                 type: PageTransitionType.rightToLeft,
               );
             }
@@ -178,28 +222,43 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                   settings.arguments as TrentAppSettingsLicensePageArguments;
 
               return PageTransition(
-                child: MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TrentAppSettingsLicensePage(
-                            applicationVersion: args.applicationVersion,
-                            applicationName: args.applicationName,
-                            applicationLegalese: args.applicationLegalese,
-                            applicationIconAssetPath:
-                                args.applicationIconAssetPath,
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TrentAppSettingsLicensePage(
+                              applicationVersion: args.applicationVersion,
+                              applicationName: args.applicationName,
+                              applicationLegalese: args.applicationLegalese,
+                              applicationIconAssetPath:
+                                  args.applicationIconAssetPath,
+                            ),
                           ),
+                        )
+                      : TrentAppSettingsLicensePage(
+                          applicationVersion: args.applicationVersion,
+                          applicationName: args.applicationName,
+                          applicationLegalese: args.applicationLegalese,
+                          applicationIconAssetPath:
+                              args.applicationIconAssetPath,
                         ),
-                      )
-                    : TrentAppSettingsLicensePage(
-                        applicationVersion: args.applicationVersion,
-                        applicationName: args.applicationName,
-                        applicationLegalese: args.applicationLegalese,
-                        applicationIconAssetPath: args.applicationIconAssetPath,
-                      ),
+                ),
                 type: PageTransitionType.rightToLeft,
               );
             }
@@ -209,25 +268,39 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                   .arguments as TrentAppSettingsLicensePackagePageArguments;
 
               return PageTransition(
-                child: MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: PackagePage(
-                            packageName: args.packageName,
-                            packageOccorrences: args.packageOccorrences,
-                            paragraphs: args.paragraphs,
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: PackagePage(
+                              packageName: args.packageName,
+                              packageOccorrences: args.packageOccorrences,
+                              paragraphs: args.paragraphs,
+                            ),
                           ),
+                        )
+                      : PackagePage(
+                          packageName: args.packageName,
+                          packageOccorrences: args.packageOccorrences,
+                          paragraphs: args.paragraphs,
                         ),
-                      )
-                    : PackagePage(
-                        packageName: args.packageName,
-                        packageOccorrences: args.packageOccorrences,
-                        paragraphs: args.paragraphs,
-                      ),
+                ),
                 type: PageTransitionType.rightToLeft,
               );
             }
@@ -237,25 +310,39 @@ class _TrentClassFindAppState extends State<TrentClassFindApp> {
                   settings.arguments as TrentFindArguments;
 
               return PageTransition(
-                child: MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TrentFind(
-                            centerIndex: args.centerIndex,
-                            floorIndex: args.floorIndex,
-                            roomIndex: args.roomIndex,
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TrentFind(
+                              centerIndex: args.centerIndex,
+                              floorIndex: args.floorIndex,
+                              roomIndex: args.roomIndex,
+                            ),
                           ),
+                        )
+                      : TrentFind(
+                          centerIndex: args.centerIndex,
+                          floorIndex: args.floorIndex,
+                          roomIndex: args.roomIndex,
                         ),
-                      )
-                    : TrentFind(
-                        centerIndex: args.centerIndex,
-                        floorIndex: args.floorIndex,
-                        roomIndex: args.roomIndex,
-                      ),
+                ),
                 type: PageTransitionType.rightToLeft,
               );
             }

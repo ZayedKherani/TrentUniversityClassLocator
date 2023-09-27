@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:math';
 
-import 'package:trent_u_class_find/universals/arguments.dart';
+import 'package:trent_u_class_locator/universals/arguments.dart';
 
 String? generateRandomString() {
   const String charset =
@@ -29,8 +29,9 @@ void main() {
       setUp(
         () {
           centerIndex = Random().nextInt(
-            10,
-          );
+                10,
+              ) +
+              1;
           trentCenterArguments = TrentCenterArguments(
             centerIndex: centerIndex!,
           );
@@ -82,11 +83,13 @@ void main() {
       setUp(
         () {
           centerIndex = Random().nextInt(
-            10,
-          );
+                10,
+              ) +
+              1;
           floorIndex = Random().nextInt(
-            10,
-          );
+                10,
+              ) +
+              1;
           trentFloorArguments = TrentFloorArguments(
             centerIndex: centerIndex!,
             floorIndex: floorIndex!,

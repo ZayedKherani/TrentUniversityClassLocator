@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:trent_u_class_find/pages/buildings/buildings.dart';
-import 'package:trent_u_class_find/pages/maps.dart';
-import 'package:trent_u_class_find/pages/media.dart';
-import 'package:trent_u_class_find/universals/variables.dart';
+import 'package:trent_u_class_locator/pages/buildings/buildings.dart';
+import 'package:trent_u_class_locator/pages/maps.dart';
+import 'package:trent_u_class_locator/pages/media.dart';
+import 'package:trent_u_class_locator/universals/variables.dart';
 
-class TrentClassFindHome extends StatefulWidget {
-  const TrentClassFindHome({
+class TrentUniversityClassLocatorHome extends StatefulWidget {
+  const TrentUniversityClassLocatorHome({
     super.key,
   });
 
   @override
-  State<TrentClassFindHome> createState() => _TrentClassFindHomeState();
+  State<TrentUniversityClassLocatorHome> createState() =>
+      _TrentUniversityClassLocatorHomeState();
 }
 
-class _TrentClassFindHomeState extends State<TrentClassFindHome>
+class _TrentUniversityClassLocatorHomeState
+    extends State<TrentUniversityClassLocatorHome>
     with SingleTickerProviderStateMixin {
   int? bottomNavIndex = 0;
 
@@ -66,50 +68,6 @@ class _TrentClassFindHomeState extends State<TrentClassFindHome>
                   const MapsPage(),
                   const MediaPage(),
                 ][bottomNavIndex!],
-                Hero(
-                  tag: 'AppBar',
-                  child: SizedBox(
-                    height: 70.0,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          padding: const EdgeInsets.all(
-                            8.0,
-                          ),
-                          color: const Color(
-                            0x000000ff,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(
-                                12.0,
-                              ),
-                            ),
-                            child: Container(
-                              height: 70.0,
-                              width: double.infinity,
-                              color: Theme.of(
-                                context!,
-                              ).colorScheme.surface,
-                              child: const Center(
-                                child: Text(
-                                  'Trent University Class Find',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'ZarBrush',
-                                    fontSize: 28,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -125,7 +83,7 @@ class _TrentClassFindHomeState extends State<TrentClassFindHome>
                       child: NavigationBarTheme(
                         data: NavigationBarThemeData(
                           backgroundColor: Theme.of(
-                            context,
+                            context!,
                           ).colorScheme.surface,
                           // height: 40.0,
                         ),
@@ -179,7 +137,7 @@ class _TrentClassFindHomeState extends State<TrentClassFindHome>
     if (MediaQuery.of(
           context!,
         ).size.width >
-        600.0) {
+        550.0) {
       return Container(
         color: Theme.of(
           context,
@@ -195,8 +153,13 @@ class _TrentClassFindHomeState extends State<TrentClassFindHome>
       );
     }
 
-    return trentClassFindHome(
-      context,
-    )!;
+    return Container(
+      color: Theme.of(
+        context,
+      ).colorScheme.background,
+      child: trentClassFindHome(
+        context,
+      )!,
+    );
   }
 }

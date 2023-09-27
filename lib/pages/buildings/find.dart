@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:trent_u_class_find/services/image_file_service/image_file_service.dart';
-import 'package:trent_u_class_find/universals/variables.dart';
+import 'package:trent_u_class_locator/services/image_file_service/image_file_service.dart';
+import 'package:trent_u_class_locator/universals/variables.dart';
 
 class TrentFind extends StatefulWidget {
   const TrentFind({
@@ -125,10 +125,11 @@ class _TrentFindState extends State<TrentFind> {
                           ) =>
                               Card(
                             child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(
-                                12.0,
-                              )),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(
+                                  12.0,
+                                ),
+                              ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,6 +143,9 @@ class _TrentFindState extends State<TrentFind> {
                                           BuildContext? context,
                                         ) =>
                                             Dialog(
+                                          shadowColor: Theme.of(
+                                            context!,
+                                          ).colorScheme.surface,
                                           backgroundColor: Colors.transparent,
                                           surfaceTintColor: Colors.transparent,
                                           child: Column(
@@ -159,7 +163,7 @@ class _TrentFindState extends State<TrentFind> {
                                                   ),
                                                 ),
                                                 child: Image.asset(
-                                                  appImageQualityViewSettingsInt ==
+                                                  globalTrentAppNotifier!.getImageViewQuality() ==
                                                           1
                                                       ? trentCentersDB[widget
                                                               .centerIndex!]!
@@ -182,7 +186,7 @@ class _TrentFindState extends State<TrentFind> {
                                                               findIndex]!
                                                           .stepHDImageAssetPath!,
                                                   width: MediaQuery.of(
-                                                    context!,
+                                                    context,
                                                   ).size.width,
                                                 ),
                                               ),
@@ -199,7 +203,7 @@ class _TrentFindState extends State<TrentFind> {
                                                       (await getFilePathFromAssets(
                                                         file:
                                                             await getFileFromAssets(
-                                                          assetPath: appImageQualityDownloadSettingsInt ==
+                                                          assetPath: globalTrentAppNotifier!.getImageDownloadQuality() ==
                                                                   1
                                                               ? trentCentersDB[
                                                                       widget
@@ -226,7 +230,7 @@ class _TrentFindState extends State<TrentFind> {
                                                         ),
                                                       ))!,
                                                       albumName:
-                                                          "TrentUClassFind",
+                                                          'TrentUClassLocator',
                                                     );
 
                                                     if (context.mounted) {
@@ -350,7 +354,7 @@ class _TrentFindState extends State<TrentFind> {
                             children: [
                               Center(
                                 child: Text(
-                                  "${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.centerCode!} ${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.roomNumber!}: Find",
+                                  "${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.centerCode!} ${trentCentersDB[widget.centerIndex!]!.trentCenterFloors![widget.floorIndex!]!.rooms![widget.roomIndex!]!.roomNumber!}: Locator",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'ZarBrush',

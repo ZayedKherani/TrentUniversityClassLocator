@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trent_u_class_find/universals/arguments.dart';
+import 'package:trent_u_class_locator/universals/arguments.dart';
 
-import 'package:trent_u_class_find/universals/variables.dart';
+import 'package:trent_u_class_locator/universals/variables.dart';
 
 class TrentAppSettingsPage extends StatefulWidget {
   const TrentAppSettingsPage({super.key});
@@ -81,7 +81,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     () {
                                       appThemeSettingsInt = value!;
 
-                                      globalThemeModeNotifier!.setThemeMode(
+                                      globalTrentAppNotifier!.setThemeMode(
                                         ThemeMode.light,
                                       );
                                     },
@@ -101,7 +101,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     () {
                                       appThemeSettingsInt = value!;
 
-                                      globalThemeModeNotifier!.setThemeMode(
+                                      globalTrentAppNotifier!.setThemeMode(
                                         ThemeMode.dark,
                                       );
                                     },
@@ -121,7 +121,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     () {
                                       appThemeSettingsInt = value!;
 
-                                      globalThemeModeNotifier!.setThemeMode(
+                                      globalTrentAppNotifier!.setThemeMode(
                                         ThemeMode.system,
                                       );
                                     },
@@ -153,13 +153,19 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                               ),
                               RadioListTile.adaptive(
                                 value: 0,
-                                groupValue: appImageQualityViewSettingsInt,
+                                groupValue: globalTrentAppNotifier!
+                                    .getImageViewQuality(),
                                 onChanged: (
                                   int? value,
                                 ) {
                                   setState(
                                     () {
                                       appImageQualityViewSettingsInt = value!;
+
+                                      globalTrentAppNotifier!
+                                          .setImageViewQuality(
+                                        value,
+                                      );
                                     },
                                   );
                                 },
@@ -169,13 +175,19 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                               ),
                               RadioListTile.adaptive(
                                 value: 1,
-                                groupValue: appImageQualityViewSettingsInt,
+                                groupValue: globalTrentAppNotifier!
+                                    .getImageViewQuality(),
                                 onChanged: (
                                   int? value,
                                 ) {
                                   setState(
                                     () {
                                       appImageQualityViewSettingsInt = value!;
+
+                                      globalTrentAppNotifier!
+                                          .setImageViewQuality(
+                                        value,
+                                      );
                                     },
                                   );
                                 },
@@ -205,7 +217,8 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                               ),
                               RadioListTile.adaptive(
                                 value: 0,
-                                groupValue: appImageQualityDownloadSettingsInt,
+                                groupValue: globalTrentAppNotifier!
+                                    .getImageDownloadQuality(),
                                 onChanged: (
                                   int? value,
                                 ) {
@@ -213,6 +226,11 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     () {
                                       appImageQualityDownloadSettingsInt =
                                           value!;
+
+                                      globalTrentAppNotifier!
+                                          .setImageDownloadQuality(
+                                        value,
+                                      );
                                     },
                                   );
                                 },
@@ -222,7 +240,8 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                               ),
                               RadioListTile.adaptive(
                                 value: 1,
-                                groupValue: appImageQualityDownloadSettingsInt,
+                                groupValue: globalTrentAppNotifier!
+                                    .getImageDownloadQuality(),
                                 onChanged: (
                                   int? value,
                                 ) {
@@ -230,6 +249,11 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                     () {
                                       appImageQualityDownloadSettingsInt =
                                           value!;
+
+                                      globalTrentAppNotifier!
+                                          .setImageDownloadQuality(
+                                        value,
+                                      );
                                     },
                                   );
                                 },
@@ -290,7 +314,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                             applicationLegalese:
                                                 '© 2023 Zayed Kherani',
                                             applicationName:
-                                                'Trent University Class Find',
+                                                'Trent University Class Locator',
                                             applicationIconAssetPath:
                                                 'assets/icons/splash_icon.png',
                                           ),
@@ -359,10 +383,10 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                 ) =>
                                     AlertDialog(
                                   title: const Text(
-                                    "Reset All Shared Preferences",
+                                    "Reset All Settings",
                                   ),
                                   content: const Text(
-                                    "Are you sure you want to reset all stored settings?",
+                                    "Are you sure you want to reset all settings?",
                                   ),
                                   actions: [
                                     TextButton(
@@ -386,6 +410,10 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                           },
                                         );
 
+                                        appThemeSettingsInt = 2;
+                                        appImageQualityViewSettingsInt = 0;
+                                        appImageQualityDownloadSettingsInt = 0;
+
                                         if (context.mounted) {
                                           Navigator.pop(
                                             context,
@@ -404,7 +432,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                                 context,
                                               ).colorScheme.surface,
                                               content: Text(
-                                                "All shared preferences have been reset.",
+                                                "All Settings have been reset.",
                                                 style: TextStyle(
                                                   color: Theme.of(
                                                     context,

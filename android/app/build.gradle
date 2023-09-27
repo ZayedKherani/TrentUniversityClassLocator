@@ -29,7 +29,7 @@ if (flutterVersionName == null) {
 // }
 
 android {
-    namespace "org.zayed.trentuclassfind.trent_u_class_find"
+    namespace "org.zayed.trentuclasslocator.trent_u_class_locator"
     // compileSdkVersion flutter.compileSdkVersion
     compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()
     ndkVersion flutter.ndkVersion
@@ -48,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.zayed.trentuclassfind.trent_u_class_find"
+        applicationId "org.zayed.trentuclasslocator.trent_u_class_locator"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         // minSdkVersion flutter.minSdkVersion

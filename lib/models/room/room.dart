@@ -1,5 +1,5 @@
-import 'package:trent_u_class_find/models/enums/enums.dart';
-import 'package:trent_u_class_find/models/steps/steps.dart';
+import 'package:trent_u_class_locator/models/enums/enums.dart';
+import 'package:trent_u_class_locator/models/steps/steps.dart';
 
 class TrentRoomModel {
   final String? roomNumber;

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
-import 'package:trent_u_class_find/services/image_file_service/image_file_service.dart';
-import 'package:trent_u_class_find/universals/arguments.dart';
-import 'package:trent_u_class_find/universals/variables.dart';
+import 'package:trent_u_class_locator/services/image_file_service/image_file_service.dart';
+import 'package:trent_u_class_locator/universals/arguments.dart';
+import 'package:trent_u_class_locator/universals/variables.dart';
 
 class TrentRoom extends StatefulWidget {
   const TrentRoom({
@@ -83,6 +83,9 @@ class _TrentRoomState extends State<TrentRoom> {
                                     BuildContext? context,
                                   ) =>
                                       Dialog(
+                                    shadowColor: Theme.of(
+                                      context!,
+                                    ).colorScheme.surface,
                                     backgroundColor: Colors.transparent,
                                     surfaceTintColor: Colors.transparent,
                                     child: Column(
@@ -99,7 +102,9 @@ class _TrentRoomState extends State<TrentRoom> {
                                             ),
                                           ),
                                           child: Image.asset(
-                                            appImageQualityViewSettingsInt == 1
+                                            globalTrentAppNotifier!
+                                                        .getImageViewQuality() ==
+                                                    1
                                                 ? trentCentersDB[
                                                         widget.centerIndex!]!
                                                     .trentCenterFloors![
@@ -113,7 +118,7 @@ class _TrentRoomState extends State<TrentRoom> {
                                                     .rooms![widget.roomIndex!]!
                                                     .hDImageAssetPath!,
                                             width: MediaQuery.of(
-                                              context!,
+                                              context,
                                             ).size.width,
                                           ),
                                         ),
@@ -128,7 +133,8 @@ class _TrentRoomState extends State<TrentRoom> {
                                               await GallerySaver.saveImage(
                                                 (await getFilePathFromAssets(
                                                   file: await getFileFromAssets(
-                                                    assetPath: appImageQualityDownloadSettingsInt ==
+                                                    assetPath: globalTrentAppNotifier!
+                                                                .getImageDownloadQuality() ==
                                                             1
                                                         ? trentCentersDB[
                                                                 widget
@@ -150,7 +156,7 @@ class _TrentRoomState extends State<TrentRoom> {
                                                             .hDImageAssetPath!,
                                                   ),
                                                 ))!,
-                                                albumName: 'TrentUClassFind',
+                                                albumName: 'TrentUClassLocator',
                                               );
 
                                               if (context.mounted) {

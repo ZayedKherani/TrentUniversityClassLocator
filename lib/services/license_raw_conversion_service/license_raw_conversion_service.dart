@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:trent_u_class_find/models/license/license.dart';
+import 'package:trent_u_class_locator/models/license/license.dart';
 
 Future<List<LicensePackage?>?>? convertLicensesFuture(
   Future<List<LicenseEntry>?>? data,

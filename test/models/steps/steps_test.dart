@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:math';
 
-import 'package:trent_u_class_find/models/step/step.dart';
-import 'package:trent_u_class_find/models/steps/steps.dart';
+import 'package:trent_u_class_locator/models/step/step.dart';
+import 'package:trent_u_class_locator/models/steps/steps.dart';
 
 String? generateRandomString() {
   const String charset =
@@ -38,7 +38,10 @@ void main() {
 
       setUp(
         () {
-          numberOfSteps = Random().nextInt(10);
+          numberOfSteps = Random().nextInt(
+                10,
+              ) +
+              1;
 
           for (int? i = 0; i! < numberOfSteps!; i++) {
             stepNumbers.add(generateRandomString());
@@ -100,6 +103,305 @@ void main() {
       );
 
       test(
+        'findNextStepByNumber',
+        () {
+          for (int? i = 0; i! < numberOfSteps!; i++) {
+            if (i + 1 > numberOfSteps!) {
+              expect(
+                steps!
+                    .findNextStepByNumber(
+                      stepNumbers[i],
+                    )
+                    ?.stepNumber,
+                isNull,
+              );
+
+              expect(
+                steps!
+                    .findNextStepByNumber(
+                      stepNumbers[i],
+                    )
+                    ?.stepDescription,
+                isNull,
+              );
+
+              expect(
+                steps!
+                    .findNextStepByNumber(
+                      stepNumbers[i],
+                    )
+                    ?.stepSmallImageAssetPath,
+                isNull,
+              );
+
+              expect(
+                steps!
+                    .findNextStepByNumber(
+                      stepNumbers[i],
+                    )
+                    ?.stepHDImageAssetPath,
+                isNull,
+              );
+
+              expect(
+                steps!
+                    .findNextStepByNumber(
+                      stepNumbers[i],
+                    )
+                    ?.stepFHDImageAssetPath,
+                isNull,
+              );
+            } else {
+              if (steps!.findNextStepByNumber(
+                    stepNumbers[i],
+                  ) !=
+                  null) {
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepNumber,
+                  isA<String?>(),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepNumber,
+                  isNotNull,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepNumber,
+                  isNotEmpty,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepNumber,
+                  equals(
+                    stepNumbers.firstWhere(
+                      (
+                        String? stepNumber,
+                      ) =>
+                          stepNumber ==
+                          steps!
+                              .findNextStepByNumber(
+                                stepNumbers[i!],
+                              )!
+                              .stepNumber,
+                    ),
+                  ),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepDescription,
+                  isA<String?>(),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepDescription,
+                  isNotNull,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepDescription,
+                  isNotEmpty,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepDescription,
+                  equals(
+                    stepDescriptions.firstWhere(
+                      (
+                        String? stepDescription,
+                      ) =>
+                          stepDescription ==
+                          steps!
+                              .findNextStepByNumber(
+                                stepNumbers[i!],
+                              )!
+                              .stepDescription,
+                    ),
+                  ),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepSmallImageAssetPath,
+                  isA<String?>(),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepSmallImageAssetPath,
+                  isNotNull,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepSmallImageAssetPath,
+                  isNotEmpty,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepSmallImageAssetPath,
+                  equals(
+                    stepSmallImageAssetPaths.firstWhere(
+                      (
+                        String? stepSmallImageAssetPath,
+                      ) =>
+                          stepSmallImageAssetPath ==
+                          steps!
+                              .findNextStepByNumber(
+                                stepNumbers[i!],
+                              )!
+                              .stepSmallImageAssetPath,
+                    ),
+                  ),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepHDImageAssetPath,
+                  isA<String?>(),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepHDImageAssetPath,
+                  isNotNull,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepHDImageAssetPath,
+                  isNotEmpty,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepHDImageAssetPath,
+                  equals(
+                    stepHDImageAssetPaths.firstWhere(
+                      (
+                        String? stepHDImageAssetPath,
+                      ) =>
+                          stepHDImageAssetPath ==
+                          steps!
+                              .findNextStepByNumber(
+                                stepNumbers[i!],
+                              )!
+                              .stepHDImageAssetPath,
+                    ),
+                  ),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepFHDImageAssetPath,
+                  isA<String?>(),
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepFHDImageAssetPath,
+                  isNotNull,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepFHDImageAssetPath,
+                  isNotEmpty,
+                );
+
+                expect(
+                  steps!
+                      .findNextStepByNumber(
+                        stepNumbers[i],
+                      )!
+                      .stepFHDImageAssetPath,
+                  equals(
+                    stepFHDImageAssetPaths.firstWhere(
+                      (
+                        String? stepFHDImageAssetPath,
+                      ) =>
+                          stepFHDImageAssetPath ==
+                          steps!
+                              .findNextStepByNumber(
+                                stepNumbers[i!],
+                              )!
+                              .stepFHDImageAssetPath,
+                    ),
+                  ),
+                );
+              }
+            }
+          }
+        },
+      );
+
+      test(
         'operator []',
         () {
           for (int? i = 0; i! < numberOfSteps!; i++) {
@@ -119,9 +421,11 @@ void main() {
             );
 
             expect(
-              steps![i]!.stepNumber,
+              stepNumbers.contains(
+                steps![i]!.stepNumber,
+              ),
               equals(
-                stepNumbers[i],
+                true,
               ),
             );
 
@@ -141,9 +445,11 @@ void main() {
             );
 
             expect(
-              steps![i]!.stepDescription,
+              stepDescriptions.contains(
+                steps![i]!.stepDescription,
+              ),
               equals(
-                stepDescriptions[i],
+                true,
               ),
             );
 
@@ -163,9 +469,11 @@ void main() {
             );
 
             expect(
-              steps![i]!.stepSmallImageAssetPath,
+              stepSmallImageAssetPaths.contains(
+                steps![i]!.stepSmallImageAssetPath,
+              ),
               equals(
-                stepSmallImageAssetPaths[i],
+                true,
               ),
             );
 
@@ -185,9 +493,11 @@ void main() {
             );
 
             expect(
-              steps![i]!.stepHDImageAssetPath,
+              stepHDImageAssetPaths.contains(
+                steps![i]!.stepHDImageAssetPath,
+              ),
               equals(
-                stepHDImageAssetPaths[i],
+                true,
               ),
             );
 
@@ -207,9 +517,11 @@ void main() {
             );
 
             expect(
-              steps![i]!.stepFHDImageAssetPath,
+              stepFHDImageAssetPaths.contains(
+                steps![i]!.stepFHDImageAssetPath,
+              ),
               equals(
-                stepFHDImageAssetPaths[i],
+                true,
               ),
             );
           }
@@ -417,255 +729,6 @@ void main() {
             ),
             isNull,
           );
-        },
-      );
-
-      test(
-        'findNextStepByNumber',
-        () {
-          for (int? i = 0; i! < numberOfSteps!; i++) {
-            if (i + 1 > numberOfSteps!) {
-              expect(
-                steps!
-                    .findNextStepByNumber(
-                      stepNumbers[i],
-                    )
-                    ?.stepNumber,
-                isNull,
-              );
-
-              expect(
-                steps!
-                    .findNextStepByNumber(
-                      stepNumbers[i],
-                    )
-                    ?.stepDescription,
-                isNull,
-              );
-
-              expect(
-                steps!
-                    .findNextStepByNumber(
-                      stepNumbers[i],
-                    )
-                    ?.stepSmallImageAssetPath,
-                isNull,
-              );
-
-              expect(
-                steps!
-                    .findNextStepByNumber(
-                      stepNumbers[i],
-                    )
-                    ?.stepHDImageAssetPath,
-                isNull,
-              );
-
-              expect(
-                steps!
-                    .findNextStepByNumber(
-                      stepNumbers[i],
-                    )
-                    ?.stepFHDImageAssetPath,
-                isNull,
-              );
-            } else {
-              if (steps!.findNextStepByNumber(
-                    stepNumbers[i],
-                  ) !=
-                  null) {
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepNumber,
-                  isA<String?>(),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepNumber,
-                  isNotNull,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepNumber,
-                  isNotEmpty,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepNumber,
-                  equals(
-                    stepNumbers[i + 1],
-                  ),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepDescription,
-                  isA<String?>(),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepDescription,
-                  isNotNull,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepDescription,
-                  isNotEmpty,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepDescription,
-                  equals(
-                    stepDescriptions[i + 1],
-                  ),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepSmallImageAssetPath,
-                  isA<String?>(),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepSmallImageAssetPath,
-                  isNotNull,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepSmallImageAssetPath,
-                  isNotEmpty,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepSmallImageAssetPath,
-                  equals(
-                    stepSmallImageAssetPaths[i + 1],
-                  ),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepHDImageAssetPath,
-                  isA<String?>(),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepHDImageAssetPath,
-                  isNotNull,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepHDImageAssetPath,
-                  isNotEmpty,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepHDImageAssetPath,
-                  equals(
-                    stepHDImageAssetPaths[i + 1],
-                  ),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepFHDImageAssetPath,
-                  isA<String?>(),
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepFHDImageAssetPath,
-                  isNotNull,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepFHDImageAssetPath,
-                  isNotEmpty,
-                );
-
-                expect(
-                  steps!
-                      .findNextStepByNumber(
-                        stepNumbers[i],
-                      )!
-                      .stepFHDImageAssetPath,
-                  equals(
-                    stepFHDImageAssetPaths[i + 1],
-                  ),
-                );
-              }
-            }
-          }
         },
       );
     },

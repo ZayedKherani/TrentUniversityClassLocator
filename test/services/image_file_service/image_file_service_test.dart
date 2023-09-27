@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:glob/list_local_fs.dart';
 
-import 'package:trent_u_class_find/services/image_file_service/image_file_service.dart';
+import 'package:trent_u_class_locator/services/image_file_service/image_file_service.dart';
 
 import 'dart:convert';
 import 'package:glob/glob.dart';

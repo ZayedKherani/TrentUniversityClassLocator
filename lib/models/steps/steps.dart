@@ -1,4 +1,4 @@
-import 'package:trent_u_class_find/models/step/step.dart';
+import 'package:trent_u_class_locator/models/step/step.dart';
 
 class TrentRoomFindSteps {
   final List<TrentRoomFindStep?>? steps;

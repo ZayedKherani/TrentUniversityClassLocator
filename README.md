@@ -1,1 +1,1 @@
-Trent University Class Find
+Trent University Class Locator

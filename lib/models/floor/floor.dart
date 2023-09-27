@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trent_u_class_find/models/enums/enums.dart';
-import 'package:trent_u_class_find/models/room/room.dart';
+import 'package:trent_u_class_locator/models/enums/enums.dart';
+import 'package:trent_u_class_locator/models/room/room.dart';
 
 class TrentFloorModel {
   final String? floorNumber;

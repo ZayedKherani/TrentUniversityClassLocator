@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:trent_u_class_find/universals/variables.dart';
+import 'package:trent_u_class_locator/universals/variables.dart';
 
 ColorScheme? trentUColorScheme = const ColorScheme(
   brightness: Brightness.light,

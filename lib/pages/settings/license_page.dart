@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:trent_u_class_find/models/license/license.dart';
-import 'package:trent_u_class_find/services/license_raw_conversion_service/license_raw_conversion_service.dart';
-import 'package:trent_u_class_find/universals/arguments.dart';
+import 'package:trent_u_class_locator/models/license/license.dart';
+import 'package:trent_u_class_locator/services/license_raw_conversion_service/license_raw_conversion_service.dart';
+import 'package:trent_u_class_locator/universals/arguments.dart';
 
 class TrentAppSettingsLicensePage extends StatefulWidget {
   const TrentAppSettingsLicensePage({

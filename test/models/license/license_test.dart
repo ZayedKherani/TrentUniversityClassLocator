@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:math';
 
-import 'package:trent_u_class_find/models/license/license.dart';
+import 'package:trent_u_class_locator/models/license/license.dart';
 
 String? generateRandomString() {
   const String charset =
@@ -162,7 +162,7 @@ void main() {
             ),
           );
 
-          int? numberOfPackageOccorrencesToAdd = Random().nextInt(100);
+          int? numberOfPackageOccorrencesToAdd = Random().nextInt(100,);
 
           for (int? i = 0; i! < numberOfPackageOccorrencesToAdd; i++) {
             await licensePackage!.addPackageOccorrence();
@@ -232,7 +232,7 @@ void main() {
             ),
           );
 
-          int? numberOfParagraphsToAdd = Random().nextInt(100);
+          int? numberOfParagraphsToAdd = Random().nextInt(100,);
 
           for (int? i = 0; i! < numberOfParagraphsToAdd; i++) {
             String? paragraphContent = generateRandomString();
