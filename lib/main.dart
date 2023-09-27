@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:trent_u_class_locator/pages/buildings/find.dart';
+import 'package:trent_u_class_locator/pages/terms.dart';
 
 import 'package:trent_u_class_locator/universals/arguments.dart';
 import 'package:trent_u_class_locator/pages/buildings/center.dart';
@@ -93,6 +94,10 @@ class _TrentUniversityClassLocatorAppState
               BuildContext? context,
             ) =>
                 const TrentAppSettingsPage(),
+            '/terms': (
+              BuildContext? context,
+            ) =>
+                const TermsPage(),
           },
           onGenerateRoute: (
             RouteSettings? settings,
