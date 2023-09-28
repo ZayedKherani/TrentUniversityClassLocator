@@ -94,11 +94,31 @@ class _TrentUniversityClassLocatorAppState
             '/settings': (
               BuildContext? context,
             ) =>
-                const TrentAppSettingsPage(),
+                MediaQuery.of(
+                          context!,
+                        ).size.width >
+                        600
+                    ? const Center(
+                        child: SizedBox(
+                          width: 550.0,
+                          child: TrentAppSettingsPage(),
+                        ),
+                      )
+                    : const TrentAppSettingsPage(),
             '/terms': (
               BuildContext? context,
             ) =>
-                const TermsPage(),
+                MediaQuery.of(
+                          context!,
+                        ).size.width >
+                        600
+                    ? const Center(
+                        child: SizedBox(
+                          width: 550.0,
+                          child: TermsPage(),
+                        ),
+                      )
+                    : const TermsPage(),
           },
           onGenerateRoute: (
             RouteSettings? settings,
