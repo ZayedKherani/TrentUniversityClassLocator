@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trent_u_class_locator/universals/arguments.dart';
 
+import 'package:trent_u_class_locator/universals/arguments.dart';
 import 'package:trent_u_class_locator/universals/variables.dart';
 
 class TrentAppSettingsPage extends StatefulWidget {
@@ -14,10 +15,21 @@ class TrentAppSettingsPage extends StatefulWidget {
 
 class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
   ScrollController? settingsPageScrollController;
+  String? appVersion;
 
   @override
-  void initState() {
+  void initState() async {
     settingsPageScrollController = ScrollController();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (
+        Duration? timeStamp,
+      ) async {
+        PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+        appVersion = packageInfo.version;
+      },
+    );
 
     super.initState();
   }
@@ -299,8 +311,8 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                   backgroundColor: Theme.of(
                                     context!,
                                   ).colorScheme.surface,
-                                  content: const Text(
-                                    "Version 1.0.0-beta-rc2",
+                                  content: Text(
+                                    "Version ${appVersion!}",
                                   ),
                                   actions: [
                                     TextButton(
@@ -309,9 +321,8 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                                           context,
                                           '/settings/licenses',
                                           arguments:
-                                              const TrentAppSettingsLicensePageArguments(
-                                            applicationVersion:
-                                                '1.0.0-beta-rc2',
+                                              TrentAppSettingsLicensePageArguments(
+                                            applicationVersion: appVersion!,
                                             applicationLegalese:
                                                 '© 2023 Zayed Kherani',
                                             applicationName:
