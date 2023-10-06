@@ -100,10 +100,11 @@ class _PackagePageState extends State<PackagePage> {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(
-                                context!,
-                              ).size.height /
-                              10,
+                          height: (MediaQuery.of(
+                                    context!,
+                                  ).size.height /
+                                  10) +
+                              10.0,
                         ),
                       ],
                     ),

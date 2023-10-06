@@ -155,10 +155,11 @@ class _TrentFloorState extends State<TrentFloor> {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(
-                                context!,
-                              ).size.height /
-                              10,
+                          height: (MediaQuery.of(
+                                    context!,
+                                  ).size.height /
+                                  10) +
+                              10.0,
                         ),
                       ],
                     ),

@@ -99,9 +99,12 @@ class _TrentCenterState extends State<TrentCenter> {
                                               12.0,
                                             ),
                                           ),
-                                          child: Image.asset(
-                                            trentCentersDB[widget.centerIndex!]!
-                                                .hDImageAssetPath!,
+                                          child: Image(
+                                            image: AssetImage(
+                                              trentCentersDB[
+                                                      widget.centerIndex!]!
+                                                  .hDImageAssetPath!,
+                                            ),
                                             width: MediaQuery.of(
                                                       context,
                                                     ).size.width >
@@ -110,6 +113,51 @@ class _TrentCenterState extends State<TrentCenter> {
                                                 : MediaQuery.of(
                                                     context,
                                                   ).size.width,
+                                            frameBuilder: (
+                                              BuildContext? context,
+                                              Widget child,
+                                              int? frame,
+                                              bool wasSynchronouslyLoaded,
+                                            ) =>
+                                                AnimatedOpacity(
+                                              opacity: frame == null ? 0 : 1,
+                                              duration: const Duration(
+                                                seconds: 1,
+                                              ),
+                                              curve: Curves.easeOut,
+                                              child: child,
+                                            ),
+                                            loadingBuilder: (
+                                              BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent? loadingProgress,
+                                            ) {
+                                              if (loadingProgress != null) {
+                                                return Center(
+                                                  child:
+                                                      CircularProgressIndicator
+                                                          .adaptive(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      Theme.of(
+                                                        context,
+                                                      ).colorScheme.onSurface,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              return child;
+                                            },
+                                            errorBuilder: (
+                                              BuildContext context,
+                                              Object exception,
+                                              StackTrace? stackTrace,
+                                            ) {
+                                              return const Text(
+                                                "Error: Could not load image",
+                                              );
+                                            },
                                           ),
                                         ),
                                         const SizedBox(
@@ -224,9 +272,53 @@ class _TrentCenterState extends State<TrentCenter> {
                                   ),
                                 );
                               },
-                              child: Image.asset(
-                                trentCentersDB[widget.centerIndex!]!
-                                    .reviewImageAssetPath!,
+                              child: Image(
+                                image: AssetImage(
+                                  trentCentersDB[widget.centerIndex!]!
+                                      .reviewImageAssetPath!,
+                                ),
+                                frameBuilder: (
+                                  BuildContext? context,
+                                  Widget child,
+                                  int? frame,
+                                  bool wasSynchronouslyLoaded,
+                                ) =>
+                                    AnimatedOpacity(
+                                  opacity: frame == null ? 0 : 1,
+                                  duration: const Duration(
+                                    seconds: 1,
+                                  ),
+                                  curve: Curves.easeOut,
+                                  child: child,
+                                ),
+                                loadingBuilder: (
+                                  BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress,
+                                ) {
+                                  if (loadingProgress != null) {
+                                    return Center(
+                                      child: CircularProgressIndicator.adaptive(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          Theme.of(
+                                            context,
+                                          ).colorScheme.onSurface,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return child;
+                                },
+                                errorBuilder: (
+                                  BuildContext context,
+                                  Object exception,
+                                  StackTrace? stackTrace,
+                                ) {
+                                  return const Text(
+                                    "Error: Could not load image",
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -348,10 +440,11 @@ class _TrentCenterState extends State<TrentCenter> {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(
-                                context!,
-                              ).size.height /
-                              10,
+                          height: (MediaQuery.of(
+                                    context!,
+                                  ).size.height /
+                                  10) +
+                              10.0,
                         ),
                       ],
                     ),

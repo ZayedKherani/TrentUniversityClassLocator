@@ -164,30 +164,34 @@ class _TrentFindState extends State<TrentFind> {
                                                     12.0,
                                                   ),
                                                 ),
-                                                child: Image.asset(
-                                                  globalTrentAppNotifier!
-                                                              .getImageViewQuality() ==
-                                                          1
-                                                      ? trentCentersDB[widget
-                                                              .centerIndex!]!
-                                                          .trentCenterFloors![
-                                                              widget
-                                                                  .floorIndex!]!
-                                                          .rooms![widget
-                                                              .roomIndex!]!
-                                                          .findRoomSteps![
-                                                              findIndex]!
-                                                          .stepFHDImageAssetPath!
-                                                      : trentCentersDB[widget
-                                                              .centerIndex!]!
-                                                          .trentCenterFloors![
-                                                              widget
-                                                                  .floorIndex!]!
-                                                          .rooms![widget
-                                                              .roomIndex!]!
-                                                          .findRoomSteps![
-                                                              findIndex]!
-                                                          .stepHDImageAssetPath!,
+                                                child: Image(
+                                                  image: AssetImage(
+                                                    globalTrentAppNotifier!
+                                                                .getImageViewQuality() ==
+                                                            1
+                                                        ? trentCentersDB[
+                                                                widget
+                                                                    .centerIndex!]!
+                                                            .trentCenterFloors![
+                                                                widget
+                                                                    .floorIndex!]!
+                                                            .rooms![widget
+                                                                .roomIndex!]!
+                                                            .findRoomSteps![
+                                                                findIndex]!
+                                                            .stepFHDImageAssetPath!
+                                                        : trentCentersDB[
+                                                                widget
+                                                                    .centerIndex!]!
+                                                            .trentCenterFloors![
+                                                                widget
+                                                                    .floorIndex!]!
+                                                            .rooms![widget
+                                                                .roomIndex!]!
+                                                            .findRoomSteps![
+                                                                findIndex]!
+                                                            .stepHDImageAssetPath!,
+                                                  ),
                                                   width: MediaQuery.of(
                                                             context,
                                                           ).size.width >
@@ -196,6 +200,56 @@ class _TrentFindState extends State<TrentFind> {
                                                       : MediaQuery.of(
                                                           context,
                                                         ).size.width,
+                                                  frameBuilder: (
+                                                    BuildContext? context,
+                                                    Widget child,
+                                                    int? frame,
+                                                    bool wasSynchronouslyLoaded,
+                                                  ) =>
+                                                      AnimatedOpacity(
+                                                    opacity:
+                                                        frame == null ? 0 : 1,
+                                                    duration: const Duration(
+                                                      seconds: 1,
+                                                    ),
+                                                    curve: Curves.easeOut,
+                                                    child: child,
+                                                  ),
+                                                  loadingBuilder: (
+                                                    BuildContext context,
+                                                    Widget child,
+                                                    ImageChunkEvent?
+                                                        loadingProgress,
+                                                  ) {
+                                                    if (loadingProgress !=
+                                                        null) {
+                                                      return Center(
+                                                        child:
+                                                            CircularProgressIndicator
+                                                                .adaptive(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                            Theme.of(
+                                                              context,
+                                                            )
+                                                                .colorScheme
+                                                                .onSurface,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    return child;
+                                                  },
+                                                  errorBuilder: (
+                                                    BuildContext context,
+                                                    Object exception,
+                                                    StackTrace? stackTrace,
+                                                  ) {
+                                                    return const Text(
+                                                      "Error: Could not load image",
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                               const SizedBox(
@@ -372,13 +426,58 @@ class _TrentFindState extends State<TrentFind> {
                                         ),
                                       );
                                     },
-                                    child: Image.asset(
-                                      trentCentersDB[widget.centerIndex!]!
-                                          .trentCenterFloors![
-                                              widget.floorIndex!]!
-                                          .rooms![widget.roomIndex!]!
-                                          .findRoomSteps![findIndex!]!
-                                          .stepSmallImageAssetPath!,
+                                    child: Image(
+                                      image: AssetImage(
+                                        trentCentersDB[widget.centerIndex!]!
+                                            .trentCenterFloors![
+                                                widget.floorIndex!]!
+                                            .rooms![widget.roomIndex!]!
+                                            .findRoomSteps![findIndex!]!
+                                            .stepSmallImageAssetPath!,
+                                      ),
+                                      frameBuilder: (
+                                        BuildContext? context,
+                                        Widget child,
+                                        int? frame,
+                                        bool wasSynchronouslyLoaded,
+                                      ) =>
+                                          AnimatedOpacity(
+                                        opacity: frame == null ? 0 : 1,
+                                        duration: const Duration(
+                                          seconds: 1,
+                                        ),
+                                        curve: Curves.easeOut,
+                                        child: child,
+                                      ),
+                                      loadingBuilder: (
+                                        BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress,
+                                      ) {
+                                        if (loadingProgress != null) {
+                                          return Center(
+                                            child: CircularProgressIndicator
+                                                .adaptive(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                Theme.of(
+                                                  context,
+                                                ).colorScheme.onSurface,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        return child;
+                                      },
+                                      errorBuilder: (
+                                        BuildContext context,
+                                        Object exception,
+                                        StackTrace? stackTrace,
+                                      ) {
+                                        return const Text(
+                                          "Error: Could not load image",
+                                        );
+                                      },
                                     ),
                                   ),
                                   ListTile(
@@ -413,7 +512,11 @@ class _TrentFindState extends State<TrentFind> {
                           height: 10.0,
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context!).size.height / 10,
+                          height: (MediaQuery.of(
+                                    context!,
+                                  ).size.height /
+                                  10) +
+                              10.0,
                         ),
                       ],
                     ),

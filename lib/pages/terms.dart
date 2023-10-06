@@ -49,22 +49,22 @@ class _TermsPageState extends State<TermsPage> {
                                 child: Wrap(
                                   children: [
                                     Text(
-                                      """Effective September 27th, 2023
+                                      """Effective October 6th, 2023
 
 1. Acceptance of Terms
-By using The Trent University Class Find App and accessing the website [https://zayedkherani.github.io/TrentUniversityClassLocator/], you agree to comply with and be bound by the following legally binding terms and conditions ("Terms"). If you do not agree to these Terms, please do not use The Trent University Class Find App.
+By using The Trent University Class Locator App and accessing the website [https://zayedkherani.github.io/TrentUniversityClassLocator/], you agree to comply with and be bound by the following legally binding terms and conditions ("Terms"). If you do not agree to these Terms, please do not use The Trent University Class Locator App.
 
 2. Use of Images
-All images provided within The Trent University Class Find App and on the website [https://zayedkherani.github.io/TrentUniversityClassLocator/] are for personal use only. You are permitted to use these images for personal, non-commercial purposes. Any other use, including but not limited to reproduction, distribution, modification, or public display, is prohibited without the express written consent of the respective copyright owners.
+All images provided within The Trent University Class Locator App and on the website [https://zayedkherani.github.io/TrentUniversityClassLocator/] are for personal use only. You are permitted to use these images for personal, non-commercial purposes. Any other use, including but not limited to reproduction, distribution, modification, or public display, is prohibited without the express written consent of the respective copyright owners.
 
 3. Ownership of Trent University Logo
-The Trent University logo is the intellectual property of Trent University and its respective owners. The use of the Trent University logo within The Trent University Class Find App and on the website [https://zayedkherani.github.io/TrentUniversityClassLocator/] does not grant any ownership or rights to the logo. All rights and ownership of the Trent University logo remain with Trent University and its respective institutions.
+The Trent University logo is the intellectual property of Trent University and its respective owners. The use of the Trent University logo within The Trent University Class Locator App and on the website [https://zayedkherani.github.io/TrentUniversityClassLocator/] does not grant any ownership or rights to the logo. All rights and ownership of the Trent University logo remain with Trent University and its respective institutions.
 
 4. Liability
-The owner of The Trent University Class Find App, represented by the entity that owns the GitHub repository, and associated entities shall not be held liable for any damages or losses incurred while using the app or visiting the website [https://zayedkherani.github.io/TrentUniversityClassLocator/]. Users are solely responsible for their use of The Trent University Class Find App and any consequences that may arise from such use.
+The owner of The Trent University Class Locator App, represented by the entity that owns the GitHub repository, and associated entities shall not be held liable for any damages or losses incurred while using the app or visiting the website [https://zayedkherani.github.io/TrentUniversityClassLocator/]. Users are solely responsible for their use of The Trent University Class Locator App and any consequences that may arise from such use.
 
 5. Changes to Terms
-The owner of The Trent University Class Find App, represented by the entity that owns the GitHub repository, reserves the right to modify or revise these legally binding Terms at any time. Your continued use of The Trent University Class Find App and the website [https://zayedkherani.github.io/TrentUniversityClassLocator/] after any such changes are made constitutes your legally binding acceptance of the new Terms.
+The owner of The Trent University Class Locator App, represented by the entity that owns the GitHub repository, reserves the right to modify or revise these legally binding Terms at any time. Your continued use of The Trent University Class Locator App and the website [https://zayedkherani.github.io/TrentUniversityClassLocator/] after any such changes are made constitutes your legally binding acceptance of the new Terms.
 """,
                                     ),
                                   ],
@@ -72,10 +72,11 @@ The owner of The Trent University Class Find App, represented by the entity that
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(
-                                    context!,
-                                  ).size.height /
-                                  10,
+                              height: (MediaQuery.of(
+                                        context!,
+                                      ).size.height /
+                                      10) +
+                                  10.0,
                             ),
                           ],
                         ),

@@ -1062,10 +1062,11 @@ class _BuildingsPageState extends State<BuildingsPage>
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(
-                              context,
-                            ).size.height /
-                            10,
+                        height: (MediaQuery.of(
+                                  context,
+                                ).size.height /
+                                10) +
+                            10.0,
                       ),
                     ],
                   ),

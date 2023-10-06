@@ -18,7 +18,7 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
   String? appVersion;
 
   @override
-  void initState() async {
+  void initState() {
     settingsPageScrollController = ScrollController();
 
     WidgetsBinding.instance.addPostFrameCallback(
@@ -501,10 +501,11 @@ class _TrentAppSettingsPageState extends State<TrentAppSettingsPage> {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(
-                                context,
-                              ).size.height /
-                              10,
+                          height: (MediaQuery.of(
+                                    context,
+                                  ).size.height /
+                                  10) +
+                              10.0,
                         )
                       ],
                     ),

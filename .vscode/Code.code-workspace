@@ -37,6 +37,7 @@
       "editor.defaultFormatter": "ms-python.autopep8"
     },
     "python.formatting.provider": "none",
+    "dart.flutterWebRenderer": "html",
   },
   "launch": {
     "version": "0.2.0",
@@ -55,7 +56,7 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "debug",
-        "args": ["--verbose", "--web-hostname=localhost", "--web-port=5000"],
+        "args": ["--verbose", "--web-hostname=127.0.0.1", "--web-port=5000", "--web-renderer=html"],
         "cwd": "${workspaceFolder:All Files}",
         "preLaunchTask": "Flutter: Pre Launch Tasks"
       },
@@ -73,7 +74,7 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "profile",
-        "args": ["--verbose", "--web-hostname=localhost", "--web-port=5000"],
+        "args": ["--verbose", "--web-hostname=127.0.0.1", "--web-port=5000", "--web-renderer=html"],
         "cwd": "${workspaceFolder:All Files}",
         "preLaunchTask": "Flutter: Pre Launch Tasks"
       },
@@ -91,7 +92,7 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "release",
-        "args": ["--verbose", "--web-hostname=localhost", "--web-port=5000"],
+        "args": ["--verbose", "--web-hostname=127.0.0.1", "--web-port=5000", "--web-renderer=html"],
         "cwd": "${workspaceFolder:All Files}",
         "preLaunchTask": "Flutter: Pre Launch Tasks"
       },

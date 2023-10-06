@@ -138,9 +138,11 @@ class _MediaPageState extends State<MediaPage> {
                                                             12.0,
                                                           ),
                                                         ),
-                                                        child: Image.asset(
-                                                          map.value!
-                                                              .hDImageAssetPath!,
+                                                        child: Image(
+                                                          image: AssetImage(
+                                                            map.value!
+                                                                .hDImageAssetPath!,
+                                                          ),
                                                           width: MediaQuery.of(
                                                                     context,
                                                                   ).size.width >
@@ -149,6 +151,65 @@ class _MediaPageState extends State<MediaPage> {
                                                               : MediaQuery.of(
                                                                   context,
                                                                 ).size.width,
+                                                          frameBuilder: (
+                                                            BuildContext?
+                                                                context,
+                                                            Widget child,
+                                                            int? frame,
+                                                            bool
+                                                                wasSynchronouslyLoaded,
+                                                          ) =>
+                                                              AnimatedOpacity(
+                                                            opacity:
+                                                                frame == null
+                                                                    ? 0
+                                                                    : 1,
+                                                            duration:
+                                                                const Duration(
+                                                              seconds: 1,
+                                                            ),
+                                                            curve:
+                                                                Curves.easeOut,
+                                                            child: child,
+                                                          ),
+                                                          loadingBuilder: (
+                                                            BuildContext
+                                                                context,
+                                                            Widget child,
+                                                            ImageChunkEvent?
+                                                                loadingProgress,
+                                                          ) {
+                                                            if (loadingProgress !=
+                                                                null) {
+                                                              return Center(
+                                                                child:
+                                                                    CircularProgressIndicator
+                                                                        .adaptive(
+                                                                  valueColor:
+                                                                      AlwaysStoppedAnimation<
+                                                                          Color>(
+                                                                    Theme.of(
+                                                                      context,
+                                                                    )
+                                                                        .colorScheme
+                                                                        .onSurface,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                            return child;
+                                                          },
+                                                          errorBuilder: (
+                                                            BuildContext
+                                                                context,
+                                                            Object exception,
+                                                            StackTrace?
+                                                                stackTrace,
+                                                          ) {
+                                                            return const Text(
+                                                              "Error: Could not load image",
+                                                            );
+                                                          },
                                                         ),
                                                       ),
                                                       const SizedBox(
@@ -279,9 +340,62 @@ class _MediaPageState extends State<MediaPage> {
                                               ),
                                               child: SizedBox(
                                                 height: 200.0,
-                                                child: Image.asset(
-                                                  map!.value!.hDImageAssetPath!,
+                                                child: Image(
+                                                  image: AssetImage(
+                                                    map!.value!
+                                                        .hDImageAssetPath!,
+                                                  ),
                                                   fit: BoxFit.fitWidth,
+                                                  frameBuilder: (
+                                                    BuildContext? context,
+                                                    Widget child,
+                                                    int? frame,
+                                                    bool wasSynchronouslyLoaded,
+                                                  ) =>
+                                                      AnimatedOpacity(
+                                                    opacity:
+                                                        frame == null ? 0 : 1,
+                                                    duration: const Duration(
+                                                      seconds: 1,
+                                                    ),
+                                                    curve: Curves.easeOut,
+                                                    child: child,
+                                                  ),
+                                                  loadingBuilder: (
+                                                    BuildContext context,
+                                                    Widget child,
+                                                    ImageChunkEvent?
+                                                        loadingProgress,
+                                                  ) {
+                                                    if (loadingProgress !=
+                                                        null) {
+                                                      return Center(
+                                                        child:
+                                                            CircularProgressIndicator
+                                                                .adaptive(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                            Theme.of(
+                                                              context,
+                                                            )
+                                                                .colorScheme
+                                                                .onSurface,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    return child;
+                                                  },
+                                                  errorBuilder: (
+                                                    BuildContext context,
+                                                    Object exception,
+                                                    StackTrace? stackTrace,
+                                                  ) {
+                                                    return const Text(
+                                                      "Error: Could not load image",
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -417,13 +531,16 @@ class _MediaPageState extends State<MediaPage> {
                                                               12.0,
                                                             ),
                                                           ),
-                                                          child: Image.asset(
-                                                            globalTrentAppNotifier!.getImageViewQuality() ==
-                                                                    1
-                                                                ? map.value!
-                                                                    .fHDImageAssetPath!
-                                                                : map.value!
-                                                                    .hDImageAssetPath!,
+                                                          child: Image(
+                                                            image: AssetImage(
+                                                              globalTrentAppNotifier!
+                                                                          .getImageViewQuality() ==
+                                                                      1
+                                                                  ? map.value!
+                                                                      .fHDImageAssetPath!
+                                                                  : map.value!
+                                                                      .hDImageAssetPath!,
+                                                            ),
                                                             width: MediaQuery
                                                                             .of(
                                                                       context,
@@ -435,6 +552,64 @@ class _MediaPageState extends State<MediaPage> {
                                                                 : MediaQuery.of(
                                                                     context,
                                                                   ).size.width,
+                                                            frameBuilder: (
+                                                              BuildContext?
+                                                                  context,
+                                                              Widget child,
+                                                              int? frame,
+                                                              bool
+                                                                  wasSynchronouslyLoaded,
+                                                            ) =>
+                                                                AnimatedOpacity(
+                                                              opacity:
+                                                                  frame == null
+                                                                      ? 0
+                                                                      : 1,
+                                                              duration:
+                                                                  const Duration(
+                                                                seconds: 1,
+                                                              ),
+                                                              curve: Curves
+                                                                  .easeOut,
+                                                              child: child,
+                                                            ),
+                                                            loadingBuilder: (
+                                                              BuildContext
+                                                                  context,
+                                                              Widget child,
+                                                              ImageChunkEvent?
+                                                                  loadingProgress,
+                                                            ) {
+                                                              if (loadingProgress !=
+                                                                  null) {
+                                                                return Center(
+                                                                  child: CircularProgressIndicator
+                                                                      .adaptive(
+                                                                    valueColor:
+                                                                        AlwaysStoppedAnimation<
+                                                                            Color>(
+                                                                      Theme.of(
+                                                                        context,
+                                                                      )
+                                                                          .colorScheme
+                                                                          .onSurface,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return child;
+                                                            },
+                                                            errorBuilder: (
+                                                              BuildContext
+                                                                  context,
+                                                              Object exception,
+                                                              StackTrace?
+                                                                  stackTrace,
+                                                            ) {
+                                                              return const Text(
+                                                                "Error: Could not load image",
+                                                              );
+                                                            },
                                                           ),
                                                         ),
                                                         const SizedBox(
@@ -583,10 +758,63 @@ class _MediaPageState extends State<MediaPage> {
                                                 ),
                                                 child: SizedBox(
                                                   height: 200.0,
-                                                  child: Image.asset(
-                                                    map!.value!
-                                                        .reviewImageAssetPath!,
+                                                  child: Image(
+                                                    image: AssetImage(
+                                                      map!.value!
+                                                          .reviewImageAssetPath!,
+                                                    ),
                                                     fit: BoxFit.fitWidth,
+                                                    frameBuilder: (
+                                                      BuildContext? context,
+                                                      Widget child,
+                                                      int? frame,
+                                                      bool
+                                                          wasSynchronouslyLoaded,
+                                                    ) =>
+                                                        AnimatedOpacity(
+                                                      opacity:
+                                                          frame == null ? 0 : 1,
+                                                      duration: const Duration(
+                                                        seconds: 1,
+                                                      ),
+                                                      curve: Curves.easeOut,
+                                                      child: child,
+                                                    ),
+                                                    loadingBuilder: (
+                                                      BuildContext context,
+                                                      Widget child,
+                                                      ImageChunkEvent?
+                                                          loadingProgress,
+                                                    ) {
+                                                      if (loadingProgress !=
+                                                          null) {
+                                                        return Center(
+                                                          child:
+                                                              CircularProgressIndicator
+                                                                  .adaptive(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              Theme.of(
+                                                                context,
+                                                              )
+                                                                  .colorScheme
+                                                                  .onSurface,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      return child;
+                                                    },
+                                                    errorBuilder: (
+                                                      BuildContext context,
+                                                      Object exception,
+                                                      StackTrace? stackTrace,
+                                                    ) {
+                                                      return const Text(
+                                                        "Error: Could not load image",
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),
@@ -739,8 +967,10 @@ class _MediaPageState extends State<MediaPage> {
                                                               12.0,
                                                             ),
                                                           ),
-                                                          child: Image.asset(
-                                                            map.value![0]!,
+                                                          child: Image(
+                                                            image: AssetImage(
+                                                              map.value![0]!,
+                                                            ),
                                                             width: MediaQuery
                                                                             .of(
                                                                       context,
@@ -752,6 +982,64 @@ class _MediaPageState extends State<MediaPage> {
                                                                 : MediaQuery.of(
                                                                     context,
                                                                   ).size.width,
+                                                            frameBuilder: (
+                                                              BuildContext?
+                                                                  context,
+                                                              Widget child,
+                                                              int? frame,
+                                                              bool
+                                                                  wasSynchronouslyLoaded,
+                                                            ) =>
+                                                                AnimatedOpacity(
+                                                              opacity:
+                                                                  frame == null
+                                                                      ? 0
+                                                                      : 1,
+                                                              duration:
+                                                                  const Duration(
+                                                                seconds: 1,
+                                                              ),
+                                                              curve: Curves
+                                                                  .easeOut,
+                                                              child: child,
+                                                            ),
+                                                            loadingBuilder: (
+                                                              BuildContext
+                                                                  context,
+                                                              Widget child,
+                                                              ImageChunkEvent?
+                                                                  loadingProgress,
+                                                            ) {
+                                                              if (loadingProgress !=
+                                                                  null) {
+                                                                return Center(
+                                                                  child: CircularProgressIndicator
+                                                                      .adaptive(
+                                                                    valueColor:
+                                                                        AlwaysStoppedAnimation<
+                                                                            Color>(
+                                                                      Theme.of(
+                                                                        context,
+                                                                      )
+                                                                          .colorScheme
+                                                                          .onSurface,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return child;
+                                                            },
+                                                            errorBuilder: (
+                                                              BuildContext
+                                                                  context,
+                                                              Object exception,
+                                                              StackTrace?
+                                                                  stackTrace,
+                                                            ) {
+                                                              return const Text(
+                                                                "Error: Could not load image",
+                                                              );
+                                                            },
                                                           ),
                                                         ),
                                                         const SizedBox(
@@ -881,9 +1169,62 @@ class _MediaPageState extends State<MediaPage> {
                                                   ),
                                                 ),
                                                 child: SizedBox(
-                                                  child: Image.asset(
-                                                    map!.value![1]!,
+                                                  child: Image(
+                                                    image: AssetImage(
+                                                      map!.value![1]!,
+                                                    ),
                                                     fit: BoxFit.fitWidth,
+                                                    frameBuilder: (
+                                                      BuildContext? context,
+                                                      Widget child,
+                                                      int? frame,
+                                                      bool
+                                                          wasSynchronouslyLoaded,
+                                                    ) =>
+                                                        AnimatedOpacity(
+                                                      opacity:
+                                                          frame == null ? 0 : 1,
+                                                      duration: const Duration(
+                                                        seconds: 1,
+                                                      ),
+                                                      curve: Curves.easeOut,
+                                                      child: child,
+                                                    ),
+                                                    loadingBuilder: (
+                                                      BuildContext context,
+                                                      Widget child,
+                                                      ImageChunkEvent?
+                                                          loadingProgress,
+                                                    ) {
+                                                      if (loadingProgress !=
+                                                          null) {
+                                                        return Center(
+                                                          child:
+                                                              CircularProgressIndicator
+                                                                  .adaptive(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              Theme.of(
+                                                                context,
+                                                              )
+                                                                  .colorScheme
+                                                                  .onSurface,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      return child;
+                                                    },
+                                                    errorBuilder: (
+                                                      BuildContext context,
+                                                      Object exception,
+                                                      StackTrace? stackTrace,
+                                                    ) {
+                                                      return const Text(
+                                                        "Error: Could not load image",
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),
@@ -1195,8 +1536,10 @@ class _MediaPageState extends State<MediaPage> {
                                                           12.0,
                                                         ),
                                                       ),
-                                                      child: Image.asset(
-                                                        map.value![11]!,
+                                                      child: Image(
+                                                        image: AssetImage(
+                                                          map.value![11]!,
+                                                        ),
                                                         width: MediaQuery.of(
                                                                   context,
                                                                 ).size.width >
@@ -1205,6 +1548,60 @@ class _MediaPageState extends State<MediaPage> {
                                                             : MediaQuery.of(
                                                                 context,
                                                               ).size.width,
+                                                        frameBuilder: (
+                                                          BuildContext? context,
+                                                          Widget child,
+                                                          int? frame,
+                                                          bool
+                                                              wasSynchronouslyLoaded,
+                                                        ) =>
+                                                            AnimatedOpacity(
+                                                          opacity: frame == null
+                                                              ? 0
+                                                              : 1,
+                                                          duration:
+                                                              const Duration(
+                                                            seconds: 1,
+                                                          ),
+                                                          curve: Curves.easeOut,
+                                                          child: child,
+                                                        ),
+                                                        loadingBuilder: (
+                                                          BuildContext context,
+                                                          Widget child,
+                                                          ImageChunkEvent?
+                                                              loadingProgress,
+                                                        ) {
+                                                          if (loadingProgress !=
+                                                              null) {
+                                                            return Center(
+                                                              child:
+                                                                  CircularProgressIndicator
+                                                                      .adaptive(
+                                                                valueColor:
+                                                                    AlwaysStoppedAnimation<
+                                                                        Color>(
+                                                                  Theme.of(
+                                                                    context,
+                                                                  )
+                                                                      .colorScheme
+                                                                      .onSurface,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                          return child;
+                                                        },
+                                                        errorBuilder: (
+                                                          BuildContext context,
+                                                          Object exception,
+                                                          StackTrace?
+                                                              stackTrace,
+                                                        ) {
+                                                          return const Text(
+                                                            "Error: Could not load image",
+                                                          );
+                                                        },
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -1363,9 +1760,60 @@ class _MediaPageState extends State<MediaPage> {
                                               ),
                                             ),
                                             child: SizedBox(
-                                              child: Image.asset(
-                                                map!.value![1]!,
+                                              child: Image(
+                                                image: AssetImage(
+                                                  map!.value![1]!,
+                                                ),
                                                 fit: BoxFit.fill,
+                                                frameBuilder: (
+                                                  BuildContext? context,
+                                                  Widget child,
+                                                  int? frame,
+                                                  bool wasSynchronouslyLoaded,
+                                                ) =>
+                                                    AnimatedOpacity(
+                                                  opacity:
+                                                      frame == null ? 0 : 1,
+                                                  duration: const Duration(
+                                                    seconds: 1,
+                                                  ),
+                                                  curve: Curves.easeOut,
+                                                  child: child,
+                                                ),
+                                                loadingBuilder: (
+                                                  BuildContext context,
+                                                  Widget child,
+                                                  ImageChunkEvent?
+                                                      loadingProgress,
+                                                ) {
+                                                  if (loadingProgress != null) {
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator
+                                                              .adaptive(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  return child;
+                                                },
+                                                errorBuilder: (
+                                                  BuildContext context,
+                                                  Object exception,
+                                                  StackTrace? stackTrace,
+                                                ) {
+                                                  return const Text(
+                                                    "Error: Could not load image",
+                                                  );
+                                                },
                                               ),
                                             ),
                                           ),
@@ -1380,10 +1828,11 @@ class _MediaPageState extends State<MediaPage> {
                             }(),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(
-                                  context!,
-                                ).size.height /
-                                10,
+                            height: (MediaQuery.of(
+                                      context!,
+                                    ).size.height /
+                                    10) +
+                                10.0,
                           ),
                         ],
                       ),

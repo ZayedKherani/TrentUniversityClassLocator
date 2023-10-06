@@ -91,39 +91,73 @@ class _TrentUniversityClassLocatorAppState
               BuildContext? context,
             ) =>
                 const TrentUniversityClassLocatorHome(),
-            '/settings': (
-              BuildContext? context,
-            ) =>
-                MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? const Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TrentAppSettingsPage(),
-                        ),
-                      )
-                    : const TrentAppSettingsPage(),
-            '/terms': (
-              BuildContext? context,
-            ) =>
-                MediaQuery.of(
-                          context!,
-                        ).size.width >
-                        600
-                    ? const Center(
-                        child: SizedBox(
-                          width: 550.0,
-                          child: TermsPage(),
-                        ),
-                      )
-                    : const TermsPage(),
           },
           onGenerateRoute: (
             RouteSettings? settings,
           ) {
-            if (settings!.name == '/center') {
+            if (settings!.name == '/settings') {
+              return PageTransition(
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? const Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TrentAppSettingsPage(),
+                          ),
+                        )
+                      : const TrentAppSettingsPage(),
+                ),
+                type: PageTransitionType.rightToLeft,
+              );
+            }
+
+            if (settings.name == '/terms') {
+              return PageTransition(
+                child: Container(
+                  color:
+                      globalTrentAppNotifier!.getThemeMode() == ThemeMode.dark
+                          ? Colors.black
+                          : globalTrentAppNotifier!.getThemeMode() ==
+                                  ThemeMode.light
+                              ? Colors.white
+                              : MediaQuery.of(
+                                        context!,
+                                      ).platformBrightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
+                  child: MediaQuery.of(
+                            context!,
+                          ).size.width >
+                          600
+                      ? const Center(
+                          child: SizedBox(
+                            width: 550.0,
+                            child: TermsPage(),
+                          ),
+                        )
+                      : const TermsPage(),
+                ),
+                type: PageTransitionType.rightToLeft,
+              );
+            }
+
+            if (settings.name == '/center') {
               final TrentCenterArguments args =
                   settings.arguments as TrentCenterArguments;
 

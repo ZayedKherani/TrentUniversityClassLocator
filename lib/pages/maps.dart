@@ -60,9 +60,7 @@ class _MapsPageState extends State<MapsPage> {
                                         BuildContext? context,
                                       ) =>
                                           Dialog(
-                                        shadowColor: Theme.of(
-                                          context!,
-                                        ).colorScheme.surface,
+                                        shadowColor: Colors.transparent,
                                         backgroundColor: Colors.transparent,
                                         surfaceTintColor: Colors.transparent,
                                         child: Column(
@@ -79,16 +77,74 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image.asset(
-                                                "assets/images/maps/full/trentmap1.jpg",
+                                              child: Image(
+                                                image: const AssetImage(
+                                                  "assets/images/maps/full/trentmap1.jpg",
+                                                ),
                                                 width: MediaQuery.of(
-                                                          context,
+                                                          context!,
                                                         ).size.width >
                                                         550.0
                                                     ? 550.0
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
+                                                frameBuilder: (
+                                                  BuildContext? context,
+                                                  Widget child,
+                                                  int? frame,
+                                                  bool wasSynchronouslyLoaded,
+                                                ) =>
+                                                    AnimatedOpacity(
+                                                  opacity:
+                                                      frame == null ? 0 : 1,
+                                                  duration: const Duration(
+                                                    milliseconds: 500,
+                                                  ),
+                                                  curve: Curves.easeOut,
+                                                  child: child,
+                                                ),
+                                                loadingBuilder: (
+                                                  BuildContext context,
+                                                  Widget child,
+                                                  ImageChunkEvent?
+                                                      loadingProgress,
+                                                ) {
+                                                  if (loadingProgress != null) {
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator
+                                                              .adaptive(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  return AnimatedOpacity(
+                                                    opacity: 1,
+                                                    duration: const Duration(
+                                                      milliseconds: 500,
+                                                    ),
+                                                    curve: Curves.easeOut,
+                                                    child: child,
+                                                  );
+                                                },
+                                                errorBuilder: (
+                                                  BuildContext context,
+                                                  Object exception,
+                                                  StackTrace? stackTrace,
+                                                ) {
+                                                  return const Text(
+                                                    "Error: Could not load image",
+                                                  );
+                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -195,8 +251,53 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image.asset(
-                                    "assets/images/maps/small/trentmap1small.jpg",
+                                  child: Image(
+                                    image: const AssetImage(
+                                      "assets/images/maps/small/trentmap1small.jpg",
+                                    ),
+                                    frameBuilder: (
+                                      BuildContext? context,
+                                      Widget child,
+                                      int? frame,
+                                      bool wasSynchronouslyLoaded,
+                                    ) =>
+                                        AnimatedOpacity(
+                                      opacity: frame == null ? 0 : 1,
+                                      duration: const Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      curve: Curves.easeOut,
+                                      child: child,
+                                    ),
+                                    loadingBuilder: (
+                                      BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress,
+                                    ) {
+                                      if (loadingProgress != null) {
+                                        return Center(
+                                          child: CircularProgressIndicator
+                                              .adaptive(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      return child;
+                                    },
+                                    errorBuilder: (
+                                      BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace,
+                                    ) {
+                                      return const Text(
+                                        "Error: Could not load image",
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -217,71 +318,170 @@ class _MapsPageState extends State<MapsPage> {
                               height: 10.0,
                             ),
                             Card(
-                                child: ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(
-                                  12.0,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    12.0,
+                                  ),
                                 ),
-                              ),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  await showDialog(
-                                    context: context!,
-                                    builder: (
-                                      BuildContext? context,
-                                    ) =>
-                                        Dialog(
-                                      shadowColor: Theme.of(
-                                        context!,
-                                      ).colorScheme.surface,
-                                      backgroundColor: Colors.transparent,
-                                      surfaceTintColor: Colors.transparent,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                              Radius.circular(
-                                                12.0,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await showDialog(
+                                      context: context!,
+                                      builder: (
+                                        BuildContext? context,
+                                      ) =>
+                                          Dialog(
+                                        shadowColor: Colors.transparent,
+                                        backgroundColor: Colors.transparent,
+                                        surfaceTintColor: Colors.transparent,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(
+                                                  12.0,
+                                                ),
+                                              ),
+                                              child: Image(
+                                                image: const AssetImage(
+                                                  "assets/images/maps/full/trentmap2.jpg",
+                                                ),
+                                                width: MediaQuery.of(
+                                                          context!,
+                                                        ).size.width >
+                                                        550.0
+                                                    ? 550.0
+                                                    : MediaQuery.of(
+                                                        context,
+                                                      ).size.width,
+                                                frameBuilder: (
+                                                  BuildContext? context,
+                                                  Widget child,
+                                                  int? frame,
+                                                  bool wasSynchronouslyLoaded,
+                                                ) =>
+                                                    AnimatedOpacity(
+                                                  opacity:
+                                                      frame == null ? 0 : 1,
+                                                  duration: const Duration(
+                                                    milliseconds: 500,
+                                                  ),
+                                                  curve: Curves.easeOut,
+                                                  child: child,
+                                                ),
+                                                loadingBuilder: (
+                                                  BuildContext context,
+                                                  Widget child,
+                                                  ImageChunkEvent?
+                                                      loadingProgress,
+                                                ) {
+                                                  if (loadingProgress != null) {
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator
+                                                              .adaptive(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  return AnimatedOpacity(
+                                                    opacity: 1,
+                                                    duration: const Duration(
+                                                      milliseconds: 500,
+                                                    ),
+                                                    curve: Curves.easeOut,
+                                                    child: child,
+                                                  );
+                                                },
+                                                errorBuilder: (
+                                                  BuildContext context,
+                                                  Object exception,
+                                                  StackTrace? stackTrace,
+                                                ) {
+                                                  return const Text(
+                                                    "Error: Could not load image",
+                                                  );
+                                                },
                                               ),
                                             ),
-                                            child: Image.asset(
-                                              "assets/images/maps/full/trentmap2.jpg",
-                                              width: MediaQuery.of(
-                                                        context,
-                                                      ).size.width >
-                                                      550.0
-                                                  ? 550.0
-                                                  : MediaQuery.of(
-                                                      context,
-                                                    ).size.width,
+                                            const SizedBox(
+                                              height: 10.0,
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 10.0,
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () async {
-                                              try {
-                                                if (await Permission.photos
-                                                    .request()
-                                                    .isGranted) {
-                                                  await GallerySaver.saveImage(
-                                                    (await getFilePathFromAssets(
-                                                      file:
-                                                          await getFileFromAssets(
-                                                        assetPath:
-                                                            "assets/images/maps/full/trentmap2.jpg",
-                                                      ),
-                                                    ))!,
-                                                    albumName:
-                                                        'TrentUClassLocator',
-                                                  );
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                try {
+                                                  if (await Permission.photos
+                                                      .request()
+                                                      .isGranted) {
+                                                    await GallerySaver
+                                                        .saveImage(
+                                                      (await getFilePathFromAssets(
+                                                        file:
+                                                            await getFileFromAssets(
+                                                          assetPath:
+                                                              "assets/images/maps/full/trentmap2.jpg",
+                                                        ),
+                                                      ))!,
+                                                      albumName:
+                                                          'TrentUClassLocator',
+                                                    );
+
+                                                    if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        SnackBar(
+                                                          behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .all(
+                                                            8.0,
+                                                          ),
+                                                          backgroundColor:
+                                                              Theme.of(
+                                                            context,
+                                                          ).colorScheme.surface,
+                                                          content: Text(
+                                                            "Campus Map v2 Saved",
+                                                            style: TextStyle(
+                                                              color: Theme.of(
+                                                                context,
+                                                              )
+                                                                  .colorScheme
+                                                                  .onSurface,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  }
+                                                } catch (e) {
+                                                  AnchorElement(
+                                                    href:
+                                                        "assets/images/maps/full/trentmap2.jpg",
+                                                  )
+                                                    ..setAttribute(
+                                                      'download',
+                                                      'trentmap2.jpg',
+                                                    )
+                                                    ..click();
 
                                                   if (context.mounted) {
                                                     ScaffoldMessenger.of(
@@ -313,60 +513,67 @@ class _MapsPageState extends State<MapsPage> {
                                                     );
                                                   }
                                                 }
-                                              } catch (e) {
-                                                AnchorElement(
-                                                  href:
-                                                      "assets/images/maps/full/trentmap2.jpg",
-                                                )
-                                                  ..setAttribute(
-                                                    'download',
-                                                    'trentmap2.jpg',
-                                                  )
-                                                  ..click();
-
-                                                if (context.mounted) {
-                                                  ScaffoldMessenger.of(
-                                                    context,
-                                                  ).showSnackBar(
-                                                    SnackBar(
-                                                      behavior: SnackBarBehavior
-                                                          .floating,
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                        8.0,
-                                                      ),
-                                                      backgroundColor: Theme.of(
-                                                        context,
-                                                      ).colorScheme.surface,
-                                                      content: Text(
-                                                        "Campus Map v2 Saved",
-                                                        style: TextStyle(
-                                                          color: Theme.of(
-                                                            context,
-                                                          )
-                                                              .colorScheme
-                                                              .onSurface,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                              }
-                                            },
-                                            child: const Text(
-                                              "Save Map",
+                                              },
+                                              child: const Text(
+                                                "Save Map",
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Image(
+                                    image: const AssetImage(
+                                      "assets/images/maps/small/trentmap2small.jpg",
+                                    ),
+                                    frameBuilder: (
+                                      BuildContext? context,
+                                      Widget child,
+                                      int? frame,
+                                      bool wasSynchronouslyLoaded,
+                                    ) =>
+                                        AnimatedOpacity(
+                                      opacity: frame == null ? 0 : 1,
+                                      duration: const Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      curve: Curves.easeOut,
+                                      child: child,
+                                    ),
+                                    loadingBuilder: (
+                                      BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress,
+                                    ) {
+                                      if (loadingProgress != null) {
+                                        return Center(
+                                          child: CircularProgressIndicator
+                                              .adaptive(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Image.asset(
-                                  "assets/images/maps/small/trentmap2small.jpg",
+                                        );
+                                      }
+                                      return child;
+                                    },
+                                    errorBuilder: (
+                                      BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace,
+                                    ) {
+                                      return const Text(
+                                        "Error: Could not load image",
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            )),
+                            ),
                             const Card(
                               child: Center(
                                 child: Text(
@@ -397,9 +604,7 @@ class _MapsPageState extends State<MapsPage> {
                                         BuildContext? context,
                                       ) =>
                                           Dialog(
-                                        shadowColor: Theme.of(
-                                          context!,
-                                        ).colorScheme.surface,
+                                        shadowColor: Colors.transparent,
                                         backgroundColor: Colors.transparent,
                                         surfaceTintColor: Colors.transparent,
                                         child: Column(
@@ -416,16 +621,74 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image.asset(
-                                                "assets/images/maps/full/aerialview.jpg",
+                                              child: Image(
+                                                image: const AssetImage(
+                                                  "assets/images/maps/full/aerialview.jpg",
+                                                ),
                                                 width: MediaQuery.of(
-                                                          context,
+                                                          context!,
                                                         ).size.width >
                                                         550.0
                                                     ? 550.0
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
+                                                frameBuilder: (
+                                                  BuildContext? context,
+                                                  Widget child,
+                                                  int? frame,
+                                                  bool wasSynchronouslyLoaded,
+                                                ) =>
+                                                    AnimatedOpacity(
+                                                  opacity:
+                                                      frame == null ? 0 : 1,
+                                                  duration: const Duration(
+                                                    milliseconds: 500,
+                                                  ),
+                                                  curve: Curves.easeOut,
+                                                  child: child,
+                                                ),
+                                                loadingBuilder: (
+                                                  BuildContext context,
+                                                  Widget child,
+                                                  ImageChunkEvent?
+                                                      loadingProgress,
+                                                ) {
+                                                  if (loadingProgress != null) {
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator
+                                                              .adaptive(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  return AnimatedOpacity(
+                                                    opacity: 1,
+                                                    duration: const Duration(
+                                                      milliseconds: 500,
+                                                    ),
+                                                    curve: Curves.easeOut,
+                                                    child: child,
+                                                  );
+                                                },
+                                                errorBuilder: (
+                                                  BuildContext context,
+                                                  Object exception,
+                                                  StackTrace? stackTrace,
+                                                ) {
+                                                  return const Text(
+                                                    "Error: Could not load image",
+                                                  );
+                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -532,8 +795,53 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image.asset(
-                                    "assets/images/maps/small/aerialviewsmall.jpg",
+                                  child: Image(
+                                    image: const AssetImage(
+                                      "assets/images/maps/small/aerialviewsmall.jpg",
+                                    ),
+                                    frameBuilder: (
+                                      BuildContext? context,
+                                      Widget child,
+                                      int? frame,
+                                      bool wasSynchronouslyLoaded,
+                                    ) =>
+                                        AnimatedOpacity(
+                                      opacity: frame == null ? 0 : 1,
+                                      duration: const Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      curve: Curves.easeOut,
+                                      child: child,
+                                    ),
+                                    loadingBuilder: (
+                                      BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress,
+                                    ) {
+                                      if (loadingProgress != null) {
+                                        return Center(
+                                          child: CircularProgressIndicator
+                                              .adaptive(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      return child;
+                                    },
+                                    errorBuilder: (
+                                      BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace,
+                                    ) {
+                                      return const Text(
+                                        "Error: Could not load image",
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -568,9 +876,7 @@ class _MapsPageState extends State<MapsPage> {
                                         BuildContext? context,
                                       ) =>
                                           Dialog(
-                                        shadowColor: Theme.of(
-                                          context!,
-                                        ).colorScheme.surface,
+                                        shadowColor: Colors.transparent,
                                         backgroundColor: Colors.transparent,
                                         surfaceTintColor: Colors.transparent,
                                         child: Column(
@@ -587,16 +893,74 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image.asset(
-                                                "assets/images/maps/full/trentmap3.jpg",
+                                              child: Image(
+                                                image: const AssetImage(
+                                                  "assets/images/maps/full/trentmap3.jpg",
+                                                ),
                                                 width: MediaQuery.of(
-                                                          context,
+                                                          context!,
                                                         ).size.width >
                                                         550.0
                                                     ? 550.0
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
+                                                frameBuilder: (
+                                                  BuildContext? context,
+                                                  Widget child,
+                                                  int? frame,
+                                                  bool wasSynchronouslyLoaded,
+                                                ) =>
+                                                    AnimatedOpacity(
+                                                  opacity:
+                                                      frame == null ? 0 : 1,
+                                                  duration: const Duration(
+                                                    milliseconds: 500,
+                                                  ),
+                                                  curve: Curves.easeOut,
+                                                  child: child,
+                                                ),
+                                                loadingBuilder: (
+                                                  BuildContext context,
+                                                  Widget child,
+                                                  ImageChunkEvent?
+                                                      loadingProgress,
+                                                ) {
+                                                  if (loadingProgress != null) {
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator
+                                                              .adaptive(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          Theme.of(
+                                                            context,
+                                                          )
+                                                              .colorScheme
+                                                              .onSurface,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  return AnimatedOpacity(
+                                                    opacity: 1,
+                                                    duration: const Duration(
+                                                      milliseconds: 500,
+                                                    ),
+                                                    curve: Curves.easeOut,
+                                                    child: child,
+                                                  );
+                                                },
+                                                errorBuilder: (
+                                                  BuildContext context,
+                                                  Object exception,
+                                                  StackTrace? stackTrace,
+                                                ) {
+                                                  return const Text(
+                                                    "Error: Could not load image",
+                                                  );
+                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -703,8 +1067,53 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image.asset(
-                                    "assets/images/maps/small/trentmap3small.jpg",
+                                  child: Image(
+                                    image: const AssetImage(
+                                      "assets/images/maps/small/trentmap3small.jpg",
+                                    ),
+                                    frameBuilder: (
+                                      BuildContext? context,
+                                      Widget child,
+                                      int? frame,
+                                      bool wasSynchronouslyLoaded,
+                                    ) =>
+                                        AnimatedOpacity(
+                                      opacity: frame == null ? 0 : 1,
+                                      duration: const Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      curve: Curves.easeOut,
+                                      child: child,
+                                    ),
+                                    loadingBuilder: (
+                                      BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress,
+                                    ) {
+                                      if (loadingProgress != null) {
+                                        return Center(
+                                          child: CircularProgressIndicator
+                                              .adaptive(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      return child;
+                                    },
+                                    errorBuilder: (
+                                      BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace,
+                                    ) {
+                                      return const Text(
+                                        "Error: Could not load image",
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -722,10 +1131,11 @@ class _MapsPageState extends State<MapsPage> {
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(
-                                    context!,
-                                  ).size.height /
-                                  10,
+                              height: (MediaQuery.of(
+                                        context!,
+                                      ).size.height /
+                                      10) +
+                                  10.0,
                             ),
                           ],
                         ),
