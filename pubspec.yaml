@@ -3,7 +3,7 @@ description: Trent University Class Locator
 
 publish_to: "none"
 
-version: 1.0.2-charlie-rc8
+version: 1.0.4-alpha-rc6
 
 environment:
   sdk: ">=3.1.2 <4.0.0"
