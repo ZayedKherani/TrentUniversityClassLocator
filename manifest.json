@@ -1,6 +1,6 @@
 {
-  "name": "trent_u_class_locator",
-  "short_name": "trent_u_class_locator",
+  "name": "Trent University Class Locator",
+  "short_name": "Trent University Class Locator",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",
