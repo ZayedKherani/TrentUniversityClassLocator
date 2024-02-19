@@ -1,3 +1,4 @@
+import 'package:trent_u_class_locator/widgets/network_asset_image.dart';
 import 'package:universal_html/html.dart';
 
 import 'package:flutter/material.dart';
@@ -81,9 +82,7 @@ class _TrentCenterState extends State<TrentCenter> {
                                     BuildContext? context,
                                   ) =>
                                       Dialog(
-                                    shadowColor: Theme.of(
-                                      context!,
-                                    ).colorScheme.surface,
+                                    shadowColor: Colors.transparent,
                                     backgroundColor: Colors.transparent,
                                     surfaceTintColor: Colors.transparent,
                                     child: Column(
@@ -100,13 +99,13 @@ class _TrentCenterState extends State<TrentCenter> {
                                             ),
                                           ),
                                           child: Image(
-                                            image: AssetImage(
-                                              trentCentersDB[
+                                            image: NetworkAssetImage(
+                                              assetPath: trentCentersDB[
                                                       widget.centerIndex!]!
                                                   .hDImageAssetPath!,
-                                            ),
+                                            ).imageProvider!,
                                             width: MediaQuery.of(
-                                                      context,
+                                                      context!,
                                                     ).size.width >
                                                     550.0
                                                 ? 550.0
@@ -273,10 +272,11 @@ class _TrentCenterState extends State<TrentCenter> {
                                 );
                               },
                               child: Image(
-                                image: AssetImage(
-                                  trentCentersDB[widget.centerIndex!]!
-                                      .reviewImageAssetPath!,
-                                ),
+                                image: NetworkAssetImage(
+                                  assetPath:
+                                      trentCentersDB[widget.centerIndex!]!
+                                          .reviewImageAssetPath!,
+                                ).imageProvider!,
                                 frameBuilder: (
                                   BuildContext? context,
                                   Widget child,

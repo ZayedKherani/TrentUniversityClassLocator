@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trent_u_class_locator/models/license/license.dart';
 import 'package:trent_u_class_locator/services/license_raw_conversion_service/license_raw_conversion_service.dart';
 import 'package:trent_u_class_locator/universals/arguments.dart';
+import 'package:trent_u_class_locator/widgets/network_asset_image.dart';
 
 class TrentAppSettingsLicensePage extends StatefulWidget {
   const TrentAppSettingsLicensePage({
@@ -94,9 +95,9 @@ class _TrentAppSettingsLicensePageState
                               ),
                             ),
                             child: Image(
-                              image: AssetImage(
-                                widget.applicationIconAssetPath!,
-                              ),
+                              image: NetworkAssetImage(
+                                assetPath: widget.applicationIconAssetPath!,
+                              ).imageProvider!,
                               frameBuilder: (
                                 BuildContext? context,
                                 Widget child,

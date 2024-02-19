@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:trent_u_class_locator/services/image_file_service/image_file_service.dart';
+import 'package:trent_u_class_locator/widgets/network_asset_image.dart';
 import 'package:universal_html/html.dart';
 
 class MapsPage extends StatefulWidget {
@@ -77,10 +78,9 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image(
-                                                image: const AssetImage(
-                                                  "assets/images/maps/full/trentmap1.jpg",
-                                                ),
+                                              child: NetworkAssetImage(
+                                                assetPath:
+                                                    "assets/images/maps/full/trentmap1.jpg",
                                                 width: MediaQuery.of(
                                                           context!,
                                                         ).size.width >
@@ -89,62 +89,6 @@ class _MapsPageState extends State<MapsPage> {
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
-                                                frameBuilder: (
-                                                  BuildContext? context,
-                                                  Widget child,
-                                                  int? frame,
-                                                  bool wasSynchronouslyLoaded,
-                                                ) =>
-                                                    AnimatedOpacity(
-                                                  opacity:
-                                                      frame == null ? 0 : 1,
-                                                  duration: const Duration(
-                                                    milliseconds: 500,
-                                                  ),
-                                                  curve: Curves.easeOut,
-                                                  child: child,
-                                                ),
-                                                loadingBuilder: (
-                                                  BuildContext context,
-                                                  Widget child,
-                                                  ImageChunkEvent?
-                                                      loadingProgress,
-                                                ) {
-                                                  if (loadingProgress != null) {
-                                                    return Center(
-                                                      child:
-                                                          CircularProgressIndicator
-                                                              .adaptive(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          Theme.of(
-                                                            context,
-                                                          )
-                                                              .colorScheme
-                                                              .onSurface,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  return AnimatedOpacity(
-                                                    opacity: 1,
-                                                    duration: const Duration(
-                                                      milliseconds: 500,
-                                                    ),
-                                                    curve: Curves.easeOut,
-                                                    child: child,
-                                                  );
-                                                },
-                                                errorBuilder: (
-                                                  BuildContext context,
-                                                  Object exception,
-                                                  StackTrace? stackTrace,
-                                                ) {
-                                                  return const Text(
-                                                    "Error: Could not load image",
-                                                  );
-                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -251,53 +195,9 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image(
-                                    image: const AssetImage(
-                                      "assets/images/maps/small/trentmap1small.jpg",
-                                    ),
-                                    frameBuilder: (
-                                      BuildContext? context,
-                                      Widget child,
-                                      int? frame,
-                                      bool wasSynchronouslyLoaded,
-                                    ) =>
-                                        AnimatedOpacity(
-                                      opacity: frame == null ? 0 : 1,
-                                      duration: const Duration(
-                                        milliseconds: 500,
-                                      ),
-                                      curve: Curves.easeOut,
-                                      child: child,
-                                    ),
-                                    loadingBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress,
-                                    ) {
-                                      if (loadingProgress != null) {
-                                        return Center(
-                                          child: CircularProgressIndicator
-                                              .adaptive(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              Theme.of(
-                                                context,
-                                              ).colorScheme.onSurface,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      return child;
-                                    },
-                                    errorBuilder: (
-                                      BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace,
-                                    ) {
-                                      return const Text(
-                                        "Error: Could not load image",
-                                      );
-                                    },
+                                  child: const NetworkAssetImage(
+                                    assetPath:
+                                        "assets/images/maps/small/trentmap1small.jpg",
                                   ),
                                 ),
                               ),
@@ -349,10 +249,9 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image(
-                                                image: const AssetImage(
-                                                  "assets/images/maps/full/trentmap2.jpg",
-                                                ),
+                                              child: NetworkAssetImage(
+                                                assetPath:
+                                                    "assets/images/maps/full/trentmap2.jpg",
                                                 width: MediaQuery.of(
                                                           context!,
                                                         ).size.width >
@@ -361,62 +260,6 @@ class _MapsPageState extends State<MapsPage> {
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
-                                                frameBuilder: (
-                                                  BuildContext? context,
-                                                  Widget child,
-                                                  int? frame,
-                                                  bool wasSynchronouslyLoaded,
-                                                ) =>
-                                                    AnimatedOpacity(
-                                                  opacity:
-                                                      frame == null ? 0 : 1,
-                                                  duration: const Duration(
-                                                    milliseconds: 500,
-                                                  ),
-                                                  curve: Curves.easeOut,
-                                                  child: child,
-                                                ),
-                                                loadingBuilder: (
-                                                  BuildContext context,
-                                                  Widget child,
-                                                  ImageChunkEvent?
-                                                      loadingProgress,
-                                                ) {
-                                                  if (loadingProgress != null) {
-                                                    return Center(
-                                                      child:
-                                                          CircularProgressIndicator
-                                                              .adaptive(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          Theme.of(
-                                                            context,
-                                                          )
-                                                              .colorScheme
-                                                              .onSurface,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  return AnimatedOpacity(
-                                                    opacity: 1,
-                                                    duration: const Duration(
-                                                      milliseconds: 500,
-                                                    ),
-                                                    curve: Curves.easeOut,
-                                                    child: child,
-                                                  );
-                                                },
-                                                errorBuilder: (
-                                                  BuildContext context,
-                                                  Object exception,
-                                                  StackTrace? stackTrace,
-                                                ) {
-                                                  return const Text(
-                                                    "Error: Could not load image",
-                                                  );
-                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -523,53 +366,9 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image(
-                                    image: const AssetImage(
-                                      "assets/images/maps/small/trentmap2small.jpg",
-                                    ),
-                                    frameBuilder: (
-                                      BuildContext? context,
-                                      Widget child,
-                                      int? frame,
-                                      bool wasSynchronouslyLoaded,
-                                    ) =>
-                                        AnimatedOpacity(
-                                      opacity: frame == null ? 0 : 1,
-                                      duration: const Duration(
-                                        milliseconds: 500,
-                                      ),
-                                      curve: Curves.easeOut,
-                                      child: child,
-                                    ),
-                                    loadingBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress,
-                                    ) {
-                                      if (loadingProgress != null) {
-                                        return Center(
-                                          child: CircularProgressIndicator
-                                              .adaptive(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              Theme.of(
-                                                context,
-                                              ).colorScheme.onSurface,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      return child;
-                                    },
-                                    errorBuilder: (
-                                      BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace,
-                                    ) {
-                                      return const Text(
-                                        "Error: Could not load image",
-                                      );
-                                    },
+                                  child: const NetworkAssetImage(
+                                    assetPath:
+                                        "assets/images/maps/small/trentmap2small.jpg",
                                   ),
                                 ),
                               ),
@@ -621,10 +420,9 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image(
-                                                image: const AssetImage(
-                                                  "assets/images/maps/full/aerialview.jpg",
-                                                ),
+                                              child: NetworkAssetImage(
+                                                assetPath:
+                                                    "assets/images/maps/full/aerialview.jpg",
                                                 width: MediaQuery.of(
                                                           context!,
                                                         ).size.width >
@@ -633,62 +431,6 @@ class _MapsPageState extends State<MapsPage> {
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
-                                                frameBuilder: (
-                                                  BuildContext? context,
-                                                  Widget child,
-                                                  int? frame,
-                                                  bool wasSynchronouslyLoaded,
-                                                ) =>
-                                                    AnimatedOpacity(
-                                                  opacity:
-                                                      frame == null ? 0 : 1,
-                                                  duration: const Duration(
-                                                    milliseconds: 500,
-                                                  ),
-                                                  curve: Curves.easeOut,
-                                                  child: child,
-                                                ),
-                                                loadingBuilder: (
-                                                  BuildContext context,
-                                                  Widget child,
-                                                  ImageChunkEvent?
-                                                      loadingProgress,
-                                                ) {
-                                                  if (loadingProgress != null) {
-                                                    return Center(
-                                                      child:
-                                                          CircularProgressIndicator
-                                                              .adaptive(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          Theme.of(
-                                                            context,
-                                                          )
-                                                              .colorScheme
-                                                              .onSurface,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  return AnimatedOpacity(
-                                                    opacity: 1,
-                                                    duration: const Duration(
-                                                      milliseconds: 500,
-                                                    ),
-                                                    curve: Curves.easeOut,
-                                                    child: child,
-                                                  );
-                                                },
-                                                errorBuilder: (
-                                                  BuildContext context,
-                                                  Object exception,
-                                                  StackTrace? stackTrace,
-                                                ) {
-                                                  return const Text(
-                                                    "Error: Could not load image",
-                                                  );
-                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -795,53 +537,9 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image(
-                                    image: const AssetImage(
-                                      "assets/images/maps/small/aerialviewsmall.jpg",
-                                    ),
-                                    frameBuilder: (
-                                      BuildContext? context,
-                                      Widget child,
-                                      int? frame,
-                                      bool wasSynchronouslyLoaded,
-                                    ) =>
-                                        AnimatedOpacity(
-                                      opacity: frame == null ? 0 : 1,
-                                      duration: const Duration(
-                                        milliseconds: 500,
-                                      ),
-                                      curve: Curves.easeOut,
-                                      child: child,
-                                    ),
-                                    loadingBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress,
-                                    ) {
-                                      if (loadingProgress != null) {
-                                        return Center(
-                                          child: CircularProgressIndicator
-                                              .adaptive(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              Theme.of(
-                                                context,
-                                              ).colorScheme.onSurface,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      return child;
-                                    },
-                                    errorBuilder: (
-                                      BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace,
-                                    ) {
-                                      return const Text(
-                                        "Error: Could not load image",
-                                      );
-                                    },
+                                  child: const NetworkAssetImage(
+                                    assetPath:
+                                        "assets/images/maps/small/aerialviewsmall.jpg",
                                   ),
                                 ),
                               ),
@@ -871,7 +569,7 @@ class _MapsPageState extends State<MapsPage> {
                                 child: GestureDetector(
                                   onTap: () async {
                                     await showDialog(
-                                      context: context!,
+                                      context: context,
                                       builder: (
                                         BuildContext? context,
                                       ) =>
@@ -893,10 +591,9 @@ class _MapsPageState extends State<MapsPage> {
                                                   12.0,
                                                 ),
                                               ),
-                                              child: Image(
-                                                image: const AssetImage(
-                                                  "assets/images/maps/full/trentmap3.jpg",
-                                                ),
+                                              child: NetworkAssetImage(
+                                                assetPath:
+                                                    "assets/images/maps/full/trentmap3.jpg",
                                                 width: MediaQuery.of(
                                                           context!,
                                                         ).size.width >
@@ -905,62 +602,6 @@ class _MapsPageState extends State<MapsPage> {
                                                     : MediaQuery.of(
                                                         context,
                                                       ).size.width,
-                                                frameBuilder: (
-                                                  BuildContext? context,
-                                                  Widget child,
-                                                  int? frame,
-                                                  bool wasSynchronouslyLoaded,
-                                                ) =>
-                                                    AnimatedOpacity(
-                                                  opacity:
-                                                      frame == null ? 0 : 1,
-                                                  duration: const Duration(
-                                                    milliseconds: 500,
-                                                  ),
-                                                  curve: Curves.easeOut,
-                                                  child: child,
-                                                ),
-                                                loadingBuilder: (
-                                                  BuildContext context,
-                                                  Widget child,
-                                                  ImageChunkEvent?
-                                                      loadingProgress,
-                                                ) {
-                                                  if (loadingProgress != null) {
-                                                    return Center(
-                                                      child:
-                                                          CircularProgressIndicator
-                                                              .adaptive(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          Theme.of(
-                                                            context,
-                                                          )
-                                                              .colorScheme
-                                                              .onSurface,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  return AnimatedOpacity(
-                                                    opacity: 1,
-                                                    duration: const Duration(
-                                                      milliseconds: 500,
-                                                    ),
-                                                    curve: Curves.easeOut,
-                                                    child: child,
-                                                  );
-                                                },
-                                                errorBuilder: (
-                                                  BuildContext context,
-                                                  Object exception,
-                                                  StackTrace? stackTrace,
-                                                ) {
-                                                  return const Text(
-                                                    "Error: Could not load image",
-                                                  );
-                                                },
                                               ),
                                             ),
                                             const SizedBox(
@@ -1067,53 +708,17 @@ class _MapsPageState extends State<MapsPage> {
                                       ),
                                     );
                                   },
-                                  child: Image(
-                                    image: const AssetImage(
-                                      "assets/images/maps/small/trentmap3small.jpg",
-                                    ),
-                                    frameBuilder: (
-                                      BuildContext? context,
-                                      Widget child,
-                                      int? frame,
-                                      bool wasSynchronouslyLoaded,
-                                    ) =>
-                                        AnimatedOpacity(
-                                      opacity: frame == null ? 0 : 1,
-                                      duration: const Duration(
-                                        milliseconds: 500,
-                                      ),
-                                      curve: Curves.easeOut,
-                                      child: child,
-                                    ),
-                                    loadingBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress,
-                                    ) {
-                                      if (loadingProgress != null) {
-                                        return Center(
-                                          child: CircularProgressIndicator
-                                              .adaptive(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              Theme.of(
-                                                context,
-                                              ).colorScheme.onSurface,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      return child;
-                                    },
-                                    errorBuilder: (
-                                      BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace,
-                                    ) {
-                                      return const Text(
-                                        "Error: Could not load image",
-                                      );
-                                    },
+                                  child: NetworkAssetImage(
+                                    assetPath:
+                                        "assets/images/maps/small/trentmap3small.jpg",
+                                    width: MediaQuery.of(
+                                              context!,
+                                            ).size.width >
+                                            550.0
+                                        ? 550.0
+                                        : MediaQuery.of(
+                                            context,
+                                          ).size.width,
                                   ),
                                 ),
                               ),
@@ -1132,7 +737,7 @@ class _MapsPageState extends State<MapsPage> {
                             ),
                             SizedBox(
                               height: (MediaQuery.of(
-                                        context!,
+                                        context,
                                       ).size.height /
                                       10) +
                                   10.0,

@@ -1,3 +1,4 @@
+import 'package:trent_u_class_locator/widgets/network_asset_image.dart';
 import 'package:universal_html/html.dart';
 
 import 'package:flutter/material.dart';
@@ -145,9 +146,7 @@ class _TrentFindState extends State<TrentFind> {
                                           BuildContext? context,
                                         ) =>
                                             Dialog(
-                                          shadowColor: Theme.of(
-                                            context!,
-                                          ).colorScheme.surface,
+                                          shadowColor: Colors.transparent,
                                           backgroundColor: Colors.transparent,
                                           surfaceTintColor: Colors.transparent,
                                           child: Column(
@@ -165,8 +164,8 @@ class _TrentFindState extends State<TrentFind> {
                                                   ),
                                                 ),
                                                 child: Image(
-                                                  image: AssetImage(
-                                                    globalTrentAppNotifier!
+                                                  image: NetworkAssetImage(
+                                                    assetPath: globalTrentAppNotifier!
                                                                 .getImageViewQuality() ==
                                                             1
                                                         ? trentCentersDB[
@@ -191,9 +190,9 @@ class _TrentFindState extends State<TrentFind> {
                                                             .findRoomSteps![
                                                                 findIndex]!
                                                             .stepHDImageAssetPath!,
-                                                  ),
+                                                  ).imageProvider!,
                                                   width: MediaQuery.of(
-                                                            context,
+                                                            context!,
                                                           ).size.width >
                                                           550.0
                                                       ? 550.0
@@ -427,14 +426,15 @@ class _TrentFindState extends State<TrentFind> {
                                       );
                                     },
                                     child: Image(
-                                      image: AssetImage(
-                                        trentCentersDB[widget.centerIndex!]!
-                                            .trentCenterFloors![
-                                                widget.floorIndex!]!
-                                            .rooms![widget.roomIndex!]!
-                                            .findRoomSteps![findIndex!]!
-                                            .stepSmallImageAssetPath!,
-                                      ),
+                                      image: NetworkAssetImage(
+                                        assetPath:
+                                            trentCentersDB[widget.centerIndex!]!
+                                                .trentCenterFloors![
+                                                    widget.floorIndex!]!
+                                                .rooms![widget.roomIndex!]!
+                                                .findRoomSteps![findIndex!]!
+                                                .stepSmallImageAssetPath!,
+                                      ).imageProvider!,
                                       frameBuilder: (
                                         BuildContext? context,
                                         Widget child,
